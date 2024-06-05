@@ -8,139 +8,91 @@ import javax.imageio.*;
 public class connect4{
 	// Main
 	public static void main(String args[]){
-		String[][] board = new String[7][6];
+		String[][] board = new String[6][7];
         board = loadBoard();
-		board[0][4]="x";
-		board[0][3]="x";
-		board[0][2]="x";
+		int intUserCol = 0;
+		boolean blnWin = false;
+		String strPlayer = "x";
 
-		board[0][5]="H";
+		//User plays
+		while(true){
+			System.out.println("Choose a column");
+			BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+			try{
+			intUserCol = Integer.parseInt(keyboard.readLine());
+			}catch(IOException e){
+
+			}
+
+			while(intUserCol < 0 || intUserCol > 7){
+				try{
+					intUserCol = Integer.parseInt(keyboard.readLine());
+					}catch(IOException e){
+		
+					}
+			}
+
+			for (int intRow = 5; intRow >= 0; intRow--){
+				if(board[intRow][intUserCol] == "o"){
+					board[intRow][intUserCol] = strPlayer;
+					break;
+				}
+			}
+
+			for(int intRow=0;intRow<6;intRow++){
+				for(int intCol=0;intCol<7;intCol++){
+					System.out.print(board[intRow][intCol]);
+				}
+				System.out.println("\n");
+			}
+			blnWin = winCheck(board, "x");
+			System.out.println(winCheck(board, "x"));
+		}
+	}	
+	public static String[][] loadBoard(){
+        String strBoard[][] = new String[6][7];
         for(int intRow=0;intRow<6;intRow++){
             for(int intCol=0;intCol<7;intCol++){
-                System.out.print(board[intCol][intRow]);
-            }
-            System.out.println("\n");
-        }
-		
-		System.out.println(winCheck(board, 0, 5, "x"));
-	}	
-
-	public static String[][] loadBoard(){
-        String strBoard[][] = new String[7][6];
-        for(int intCol=0;intCol<7;intCol++){
-            for(int intRow=0;intRow<6;intRow++){
-                 strBoard[intCol][intRow]="o";
+                 strBoard[intRow][intCol]="o";
             }
         }
         return strBoard;
     }
-	
 	//square variable tells us what color the player is (e.g. are they x or o)
-	public static boolean winCheck(String [][] board, int intcol, int introw, String square){
-		boolean blnwin = false;
-		if(intcol == 0){
-			if(board[1][introw] == square && board[2][introw] == square && board[3][introw] == square){
-				return blnwin = true;
-			}
-		}else if(intcol == 1){
-			if(board[0][introw] == square && board[2][introw] == square && board[3][introw] == square){
-				return blnwin = true;
-			}
-			else if(board[2][introw] == square && board[3][introw] == square && board[4][introw] == square){
-				return blnwin = true;
-			}
-		}else if(intcol == 2){
-			if(board[0][introw] == square && board[1][introw] == square && board[3][introw] == square){
-				return blnwin = true;
-			}
-			else if(board[1][introw] == square && board[3][introw] == square && board[4][introw] == square){
-				return blnwin = true;
-			}
-			else if(board[3][introw] == square && board[4][introw] == square && board[5][introw] == square){
-				return blnwin = true;
-			}
-		}else if(intcol == 3){
-			if(board[0][introw] == square && board[1][introw] == square && board[2][introw] == square){
-				return blnwin = true;
-			}
-			else if(board[1][introw] == square && board[2][introw] == square && board[4][introw] == square){
-				return blnwin = true;
-			}
-			else if(board[2][introw] == square && board[4][introw] == square && board[5][introw] == square){
-				return blnwin = true;
-			}
-		}else if(intcol == 4){
-			if(board[1][introw] == square && board[2][introw] == square && board[3][introw] == square){
-				return blnwin = true;
-			}
-			else if(board[2][introw] == square && board[3][introw] == square && board[5][introw] == square){
-				return blnwin = true;
-			}
-		}else if(intcol == 5){
-			if(board[2][introw] == square && board[3][introw] == square && board[4][introw] == square){
-				return blnwin = true;
+	public static boolean winCheck(String [][] board, String square){
+		//Horizontal win
+		for(int intRow=0;intRow<6;intRow++){
+			for(int intCol=0;intCol<4;intCol++){
+				if(board[intRow][intCol] == square && board[intRow][intCol+1] == square && board[intRow][intCol+2] == square && board[intRow][intCol+3] == square){
+					return true;
+				}
 			}
 		}
-
-		if(introw == 0){
-			if(board[intcol][1] == square && board[intcol][2] == square && board[intcol][3] == square){
-				return blnwin = true;
-			}
-		}else if(introw == 1){
-			if(board[intcol][0] == square && board[intcol][2] == square && board[intcol][3] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][2] == square && board[intcol][3] == square && board[intcol][4] == square){
-				return blnwin = true;
-			}
-		}else if(introw == 2){
-			if(board[intcol][0] == square && board[intcol][1] == square && board[intcol][3] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][1] == square && board[intcol][3] == square && board[intcol][4] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][3] == square && board[intcol][4] == square && board[intcol][5] == square){
-				return blnwin = true;
-			}
-		}else if(introw == 3){
-			if(board[intcol][0] == square && board[intcol][1] == square && board[intcol][2] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][1] == square && board[intcol][2] == square && board[intcol][4] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][2] == square && board[intcol][4] == square && board[intcol][5] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][4] == square && board[intcol][5] == square && board[intcol][6] == square){
-				return blnwin = true;
-			}
-		}else if(introw == 4){
-			if(board[intcol][1] == square && board[intcol][2] == square && board[intcol][3] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][2] == square && board[intcol][3] == square && board[intcol][5] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][3] == square && board[intcol][5] == square && board[intcol][6] == square){
-				return blnwin = true;
+		//Vertical win
+		for(int intRow=0;intRow<2;intRow++){
+			for(int intCol=0;intCol<7;intCol++){
+				if(board[intRow][intCol] == square && board[intRow+1][intCol] == square && board[intRow+2][intCol] == square && board[intRow+3][intCol] == square){
+					return true;
+				}
 			}
 		}
-		else if(introw == 5){
-			if(board[intcol][2] == square && board[intcol][3] == square && board[intcol][4] == square){
-				return blnwin = true;
-			}
-			else if(board[intcol][3] == square && board[intcol][4] == square && board[intcol][6] == square){
-				return blnwin = true;
-			}
-		}
-		else if(introw == 6){
-			if(board[intcol][3] == square && board[intcol][4] == square && board[intcol][5] == square){
-				return blnwin = true;
+		//Diagonal Upwards (to the right) Win
+		for(int intRow=3;intRow<6;intRow++){
+			for(int intCol=0;intCol<4;intCol++){
+				if(board[intRow][intCol] == square && board[intRow-1][intCol+1] == square && board[intRow-2][intCol+2] == square && board[intRow-3][intCol+3] == square){
+					return true;
+				}
 			}
 		}
-		return blnwin;
+		//Diagonal Downwards (to the left) Win
+		for(int intRow=0;intRow<3;intRow++){
+			for(int intCol=0;intCol<4;intCol++){
+				if(board[intRow][intCol] == square && board[intRow+1][intCol+1] == square && board[intRow+2][intCol+2] == square && board[intRow+3][intCol+3] == square){
+					return true;
+				}
+			}
+		}
+		return false;
 	} 
 	
 }
