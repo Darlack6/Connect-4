@@ -27,7 +27,6 @@ public class playpanel extends JPanel{
     BufferedImage imgp1; 
     BufferedImage imgp2; 
     
-    String part [] = new String [3]; 
     
     /**methods*/
     public void paintComponent(Graphics g){
@@ -35,82 +34,7 @@ public class playpanel extends JPanel{
         g.drawImage(imgbg,0,0,null);
         g.drawImage(imgboard,250,100,null);
         
-        /**draws background*/
-        
     }
-    /**gets image from jar file, if not found, uses from local file*/
-    /*public BufferedImage loadImage(String strFileName){
-        InputStream imageclass = null;
-        imageclass = this.getClass().getResourceAsStream(strFileName);
-        if(imageclass == null){
-        }else{
-            try{
-                return ImageIO.read(imageclass);
-            }catch(IOException e){
-                System.out.println("Unable to load file");
-            }
-        }
-        try{
-            System.out.println("loading from file");
-            BufferedImage theimage = ImageIO.read(new File(strFileName));
-            return theimage;
-        }catch(IOException e){
-            System.out.println("Unable to load local image file: \""+strFileName+"\"");
-            return null;
-        }
-    }*/
-    
-    //outputs array of bg, piece1, and piece2 design depending on theme
-    public static String [] themer(String theme){
-		
-		int i;
-		int a;
-		String [][] array = new String [4][3];
-		String [] part = new String [3];
-		
-		try{
-			BufferedReader themescsv = new BufferedReader(new FileReader("themes.csv"));
-			
-			for(i = 0; i < 4; i++){
-				String strLine = themescsv.readLine();
-				if(strLine == null){
-					strLine = " , , ";
-				}
-				String [] strPart = strLine.split(",");
-				for(a = 0; a < 3; a++){
-					array [i][a] = strPart[a];
-				}
-			}
-			themescsv.close();
-		
-			if(theme == "day"){
-				part [0] = array [0][0];
-				part [1] = array [0][1];
-				part [2] = array [0][2];
-			}else if(theme.equals("night")){
-				part [0] = array [1][0];
-				part [1] = array [1][1];
-				part [2] = array [1][2];
-			}else if(theme == "cave"){
-				part [0] = array [2][0];
-				part [1] = array [2][1];
-				part [2] = array [2][2];
-			}else if(theme == "custom"){
-				part [0] = array [3][0];
-				part [1] = array [3][1];
-				part [2] = array [3][2];
-			}
-				
-		}catch(IOException e){
-			for(i = 0; i < 4; i++){
-				part[0] = "day";
-				part[1] = "sun";
-				part[2] = "flower";
-			} 
-			System.out.println("exception triggered");
-		}
-		return part;
-	}
     
     /**constructor*/
     public playpanel(){
@@ -134,43 +58,7 @@ public class playpanel extends JPanel{
 			imgStar = ImageIO.read(new File("star.jpg"));
 		
 		}catch(IOException e){
-		}
-        
-        if(theme == "day"){
-			part = themer("day");
-		}else if(theme == "night"){
-			part = themer("night");
-		}else if(theme == "cave"){
-			part = themer("cave");
-		}
+        }
 		
-		if(part[0].equals("day")){
-			imgbg = imgDbg;
-			imgboard = imgDBoard;
-		}else if(part[0] == "night"){
-			imgbg = imgNbg;
-			imgboard = imgNBoard;
-		}else if(part[0] == "cave"){
-			imgbg = imgCbg;
-			imgboard = imgCBoard;
-		}
-		
-		if(part[1] == "flower"){
-			imgp1 = imgFlower;
-		}else if(part[1] == "moon"){
-			imgp1 = imgMoon;
-		}else if(part[1] == "diamond"){
-			imgp1 = imgDiamond;
-		}
-		
-		if(part[2] == "sun"){
-			imgp2 = imgSun;
-		}else if(part[2] == "star"){
-			imgp2 = imgStar;
-		}else if(part[2] == "sapphire"){
-			imgp2 = imgSap;
-		}
-        
-        
     }
 }

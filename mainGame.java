@@ -1,7 +1,9 @@
 import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.*;
-import javax.swing.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class mainGame implements ActionListener{
     //Properties
@@ -13,6 +15,8 @@ public class mainGame implements ActionListener{
     
     int intUserCol;
     public static String[][] board = new String[6][7];
+    String part [] = new String [3]; 
+
     String strPlayer = "x";
     Boolean blnWin = false;
     //buttons
@@ -196,19 +200,127 @@ public class mainGame implements ActionListener{
 			theframe.setContentPane(hppanel);
 			theframe.pack();
 		}else if(evt.getSource() == day){
+            part = themer("day");
+            if(part[0].equals("day")){
+                theplay.imgbg = theplay.imgDbg;
+                theplay.imgboard = theplay.imgDBoard;
+            }else if(part[0].equals("night")){
+                theplay.imgbg = theplay.imgNbg;
+                theplay.imgboard = theplay.imgNBoard;
+            }else if(part[0].equals("cave")){
+                theplay.imgbg = theplay.imgCbg;
+                theplay.imgboard = theplay.imgCBoard;
+            }
+            
+            if(part[1] == "flower"){
+                theplay.imgp1 = theplay.imgFlower;
+            }else if(part[1] == "moon"){
+                theplay.imgp1 = theplay.imgMoon;
+            }else if(part[1] == "diamond"){
+                theplay.imgp1 = theplay.imgDiamond;
+            }
+            
+            if(part[2] == "sun"){
+                theplay.imgp2 = theplay.imgSun;
+            }else if(part[2] == "star"){
+                theplay.imgp2 = theplay.imgStar;
+            }else if(part[2] == "sapphire"){
+                theplay.imgp2 = theplay.imgSap;
+            }
 			theplay.theme = "day";
 			theframe.setContentPane(theplay);
 			theframe.pack();
 		}else if(evt.getSource() == night){
+            part = themer("night");
+            if(part[0].equals("day")){
+                theplay.imgbg = theplay.imgDbg;
+                theplay.imgboard = theplay.imgDBoard;
+            }else if(part[0].equals("night")){
+                theplay.imgbg = theplay.imgNbg;
+                theplay.imgboard = theplay.imgNBoard;
+            }else if(part[0].equals("cave")){
+                theplay.imgbg = theplay.imgCbg;
+                theplay.imgboard = theplay.imgCBoard;
+            }
+            
+            if(part[1] == "flower"){
+                theplay.imgp1 = theplay.imgFlower;
+            }else if(part[1] == "moon"){
+                theplay.imgp1 = theplay.imgMoon;
+            }else if(part[1] == "diamond"){
+                theplay.imgp1 = theplay.imgDiamond;
+            }
+            
+            if(part[2] == "sun"){
+                theplay.imgp2 = theplay.imgSun;
+            }else if(part[2] == "star"){
+                theplay.imgp2 = theplay.imgStar;
+            }else if(part[2] == "sapphire"){
+                theplay.imgp2 = theplay.imgSap;
+            }
 			theplay.theme = "night";
 			theframe.setContentPane(theplay);
 			theframe.pack();
 			theplay.repaint();
 		}else if(evt.getSource() == cave){
+            part = themer("cave");
+            if(part[0].equals("day")){
+                theplay.imgbg = theplay.imgDbg;
+                theplay.imgboard = theplay.imgDBoard;
+            }else if(part[0].equals("night")){
+                theplay.imgbg = theplay.imgNbg;
+                theplay.imgboard = theplay.imgNBoard;
+            }else if(part[0].equals("cave")){
+                theplay.imgbg = theplay.imgCbg;
+                theplay.imgboard = theplay.imgCBoard;
+            }
+            
+            if(part[1] == "flower"){
+                theplay.imgp1 = theplay.imgFlower;
+            }else if(part[1] == "moon"){
+                theplay.imgp1 = theplay.imgMoon;
+            }else if(part[1] == "diamond"){
+                theplay.imgp1 = theplay.imgDiamond;
+            }
+            
+            if(part[2] == "sun"){
+                theplay.imgp2 = theplay.imgSun;
+            }else if(part[2] == "star"){
+                theplay.imgp2 = theplay.imgStar;
+            }else if(part[2] == "sapphire"){
+                theplay.imgp2 = theplay.imgSap;
+            }
 			theplay.theme = "cave";
 			theframe.setContentPane(theplay);
 			theframe.pack();
 		}else if(evt.getSource() == custom){
+            part = themer("custom");
+            if(part[0].equals("day")){
+                theplay.imgbg = theplay.imgDbg;
+                theplay.imgboard = theplay.imgDBoard;
+            }else if(part[0].equals("night")){
+                theplay.imgbg = theplay.imgNbg;
+                theplay.imgboard = theplay.imgNBoard;
+            }else if(part[0].equals("cave")){
+                theplay.imgbg = theplay.imgCbg;
+                theplay.imgboard = theplay.imgCBoard;
+            }
+            
+            if(part[1] == "flower"){
+                theplay.imgp1 = theplay.imgFlower;
+            }else if(part[1] == "moon"){
+                theplay.imgp1 = theplay.imgMoon;
+            }else if(part[1] == "diamond"){
+                theplay.imgp1 = theplay.imgDiamond;
+            }
+            
+            if(part[2] == "sun"){
+                theplay.imgp2 = theplay.imgSun;
+            }else if(part[2] == "star"){
+                theplay.imgp2 = theplay.imgStar;
+            }else if(part[2] == "sapphire"){
+                theplay.imgp2 = theplay.imgSap;
+            }
 			theplay.theme = "custom";
 			theframe.setContentPane(theplay);
 			theframe.pack();
@@ -356,4 +468,56 @@ public class mainGame implements ActionListener{
 		}
 		return false;
 	} 
+
+    public static String [] themer(String theme){
+		
+		int i;
+		int a;
+		String [][] array = new String [4][3];
+		String [] part = new String [3];
+		
+		try{
+			BufferedReader themescsv = new BufferedReader(new FileReader("themes.csv"));
+			
+			for(i = 0; i < 4; i++){
+				String strLine = themescsv.readLine();
+				if(strLine == null){
+					strLine = " , , ";
+				}
+				String [] strPart = strLine.split(",");
+				for(a = 0; a < 3; a++){
+					array [i][a] = strPart[a];
+				}
+			}
+			themescsv.close();
+		
+			if(theme == "day"){
+				part [0] = array [0][0];
+				part [1] = array [0][1];
+				part [2] = array [0][2];
+			}else if(theme == "night"){
+				part [0] = array [1][0];
+				part [1] = array [1][1];
+				part [2] = array [1][2];
+			}else if(theme == "cave"){
+				part [0] = array [2][0];
+				part [1] = array [2][1];
+				part [2] = array [2][2];
+			}else if(theme == "custom"){
+				part [0] = array [3][0];
+				part [1] = array [3][1];
+				part [2] = array [3][2];
+			}
+            System.out.println(part[0] + part[1] + part[2]);
+				
+		}catch(IOException e){
+			for(i = 0; i < 4; i++){
+				part[0] = "day";
+				part[1] = "sun";
+				part[2] = "flower";
+			} 
+			System.out.println("exception triggered");
+		}
+		return part;
+	}
 }
