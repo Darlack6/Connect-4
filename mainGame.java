@@ -5,8 +5,12 @@ import javax.swing.event.*;
 
 public class mainGame implements ActionListener{
     //Properties
-    JFrame theframe = new JFrame();
+    JFrame theframe = new JFrame("Connect-4");
     playpanel theplay = new playpanel();
+    homepanel hmpanel = new homepanel();
+	helppanel hppanel = new helppanel();
+	themepanel thpanel = new themepanel();
+    
     int intUserCol;
     public static String[][] board = new String[6][7];
     String strPlayer = "x";
@@ -20,6 +24,13 @@ public class mainGame implements ActionListener{
     JButton col4 = new JButton("Column 4");
     JButton col5 = new JButton("Column 5");
     JButton col6 = new JButton("Column 6");
+	
+	JButton play = new JButton("Play");
+	JButton help = new JButton("Help");
+	JButton day = new JButton("Day Mode");
+	JButton night = new JButton("Night Mode");
+	JButton cave = new JButton("Cave Mode");
+	JButton custom = new JButton("Custom");
 
     //Methods
     public void actionPerformed(ActionEvent evt){
@@ -45,8 +56,7 @@ public class mainGame implements ActionListener{
             if(blnWin == true){
                 System.out.println("win");
             }
-        }
-        else if(evt.getSource() == col1){
+        }else if(evt.getSource() == col1){
             intUserCol = 1;
             board = placeMove(intUserCol, board, strPlayer);
             blnWin = winCheck(board, strPlayer);
@@ -68,8 +78,7 @@ public class mainGame implements ActionListener{
             if(blnWin == true){
                 System.out.println("win");
             }
-        }
-        if(evt.getSource() == col2){
+        }else if(evt.getSource() == col2){
             intUserCol = 2;
             board = placeMove(intUserCol, board, strPlayer);
             blnWin = winCheck(board, strPlayer);
@@ -114,8 +123,7 @@ public class mainGame implements ActionListener{
             if(blnWin == true){
                 System.out.println("win");
             }
-        }
-        if(evt.getSource() == col4){
+        }else if(evt.getSource() == col4){
             intUserCol = 4;
             board = placeMove(intUserCol, board, strPlayer);
             blnWin = winCheck(board, strPlayer);
@@ -137,8 +145,7 @@ public class mainGame implements ActionListener{
             if(blnWin == true){
                 System.out.println("win");
             }
-        }
-        if(evt.getSource() == col5){
+        }else if(evt.getSource() == col5){
             intUserCol = 5;
             board = placeMove(intUserCol, board, strPlayer);
             blnWin = winCheck(board, strPlayer);
@@ -160,8 +167,7 @@ public class mainGame implements ActionListener{
             if(blnWin == true){
                 System.out.println("win");
             }
-        }
-        if(evt.getSource() == col6){
+        }else if(evt.getSource() == col6){
             intUserCol = 6;
             board = placeMove(intUserCol, board, strPlayer);
             blnWin = winCheck(board, strPlayer);
@@ -183,14 +189,37 @@ public class mainGame implements ActionListener{
             if(blnWin == true){
                 System.out.println("win");
             }
-        }
+        }else if(evt.getSource() == play){
+			theframe.setContentPane(thpanel);
+			theframe.pack();
+		}else if(evt.getSource() == help){
+			theframe.setContentPane(hppanel);
+			theframe.pack();
+		}else if(evt.getSource() == day){
+			theplay.theme = "day";
+			theframe.setContentPane(theplay);
+			theframe.pack();
+		}else if(evt.getSource() == night){
+			theplay.theme = "night";
+			theframe.setContentPane(theplay);
+			theframe.pack();
+			theplay.repaint();
+		}else if(evt.getSource() == cave){
+			theplay.theme = "cave";
+			theframe.setContentPane(theplay);
+			theframe.pack();
+		}else if(evt.getSource() == custom){
+			theplay.theme = "custom";
+			theframe.setContentPane(theplay);
+			theframe.pack();
+		}
     }
     //Constructor
     public mainGame(){
-        theplay.setPreferredSize(new Dimension(1280,720));
-        theplay.setLayout(null);
-
-
+        hmpanel.setLayout(null);
+        thpanel.setLayout(null);
+        hppanel.setLayout(null);
+        
         col0.setSize(170,30);
         col1.setSize(170,30);
         col2.setSize(170,30);
@@ -198,6 +227,12 @@ public class mainGame implements ActionListener{
         col4.setSize(170,30);
         col5.setSize(170,30);
         col6.setSize(170,30);
+        play.setSize(300, 75);
+        day.setSize(320, 320);
+        help.setSize(300, 75);
+        night.setSize(320, 320);
+        cave.setSize(320, 320);
+        custom.setSize(320, 320);
 
         col0.setLocation(1000,20);
         col1.setLocation(1000,50);
@@ -206,6 +241,12 @@ public class mainGame implements ActionListener{
         col4.setLocation(1000,140);
         col5.setLocation(1000,170);
         col6.setLocation(1000,200);
+        play.setLocation(490, 440);
+        help.setLocation(490, 540);
+        day.setLocation(300, 10);
+        night.setLocation(640, 10);
+        cave.setLocation(300, 350);
+		custom.setLocation(640, 350);
 
         col0.addActionListener(this);
         col1.addActionListener(this);
@@ -214,6 +255,12 @@ public class mainGame implements ActionListener{
         col4.addActionListener(this);
         col5.addActionListener(this);
         col6.addActionListener(this);
+        play.addActionListener(this);
+        help.addActionListener(this);
+        day.addActionListener(this);
+        night.addActionListener(this);
+        cave.addActionListener(this);
+        custom.addActionListener(this);
 
         theplay.add(col0);
         theplay.add(col1);
@@ -222,11 +269,26 @@ public class mainGame implements ActionListener{
         theplay.add(col4);
         theplay.add(col5);
         theplay.add(col6);
-
-        theframe.setContentPane(theplay);
+        hmpanel.add(play);
+        hmpanel.add(help);
+        thpanel.add(day);
+        thpanel.add(night);
+        thpanel.add(cave);
+        thpanel.add(custom);
+        
+		play.setHorizontalAlignment(JButton.CENTER);
+		help.setHorizontalAlignment(JButton.CENTER);
+		day.setHorizontalAlignment(JButton.CENTER);
+		night.setHorizontalAlignment(JButton.CENTER);
+		cave.setHorizontalAlignment(JButton.CENTER);
+		custom.setHorizontalAlignment(JButton.CENTER);
+		theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+		theframe.setPreferredSize(new Dimension(1280,720));
+        theframe.setLayout(null);
+        theframe.setContentPane(hmpanel);
 		theframe.pack();
         theframe.setResizable(false);
-		theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theframe.setVisible(true);
     }
 
