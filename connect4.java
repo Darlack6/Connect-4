@@ -16,53 +16,8 @@ public class connect4{
 
 		//User plays
 		while(blnWin == false){
-			System.out.println("Choose a column");
-			BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-			try{
-			intUserCol = Integer.parseInt(keyboard.readLine()) - 1;
-			}catch(IOException e){
+			placeMove(intUserCol, board, strPlayer);
 
-			}
-
-			while(intUserCol < 0 || intUserCol > 7){
-				try{
-					System.out.println("Choose a column greater than 0 and less than 7");
-					intUserCol = Integer.parseInt(keyboard.readLine()) - 1;
-					}catch(IOException e){
-		
-					}
-			}
-
-			while(board[0][intUserCol] != "0"){
-				try{
-					System.out.println("Column full, choose another column");
-					intUserCol = Integer.parseInt(keyboard.readLine()) - 1;
-					}catch(IOException e){
-		
-					}
-				while(intUserCol < 0 || intUserCol > 7){
-					try{
-						System.out.println("Choose a column greater than 0 and less than 7");
-						intUserCol = Integer.parseInt(keyboard.readLine()) - 1;
-						}catch(IOException e){
-			
-						}
-				}
-			}
-
-			for (int intRow = 5; intRow >= 0; intRow--){
-				if(board[intRow][intUserCol] == "0"){
-					board[intRow][intUserCol] = strPlayer;
-					break;
-				}
-			}
-
-			for(int intRow=0;intRow<6;intRow++){
-				for(int intCol=0;intCol<7;intCol++){
-					System.out.print(board[intRow][intCol]);
-				}
-				System.out.println("\n");
-			}
 			blnWin = winCheck(board, "x");
 			System.out.println(winCheck(board, "x"));
 
@@ -81,6 +36,55 @@ public class connect4{
 			}
 		}
 	}	
+	public static void placeMove(int intUserCol, String[][] board, String strPlayer){
+		System.out.println("Choose a column");
+		BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+		try{
+		intUserCol = Integer.parseInt(keyboard.readLine()) - 1;
+		}catch(IOException e){
+
+		}
+
+		while(intUserCol < 0 || intUserCol > 7){
+			try{
+				System.out.println("Choose a column greater than 0 and less than 7");
+				intUserCol = Integer.parseInt(keyboard.readLine()) - 1;
+				}catch(IOException e){
+	
+				}
+		}
+
+		while(board[0][intUserCol] != "0"){
+			try{
+				System.out.println("Column full, choose another column");
+				intUserCol = Integer.parseInt(keyboard.readLine()) - 1;
+				}catch(IOException e){
+	
+				}
+			while(intUserCol < 0 || intUserCol > 7){
+				try{
+					System.out.println("Choose a column greater than 0 and less than 7");
+					intUserCol = Integer.parseInt(keyboard.readLine()) - 1;
+					}catch(IOException e){
+		
+					}
+			}
+		}
+
+		for (int intRow = 5; intRow >= 0; intRow--){
+			if(board[intRow][intUserCol] == "0"){
+				board[intRow][intUserCol] = strPlayer;
+				break;
+			}
+		}
+
+		for(int intRow=0;intRow<6;intRow++){
+			for(int intCol=0;intCol<7;intCol++){
+				System.out.print(board[intRow][intCol]);
+			}
+			System.out.println("\n");
+		}
+	}
 	public static String[][] loadBoard(){
         String strBoard[][] = new String[6][7];
         for(int intRow=0;intRow<6;intRow++){
