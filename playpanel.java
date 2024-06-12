@@ -30,7 +30,23 @@ public class playpanel extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(imgbg,0,0,null);
+        
+        //y-axis offput by 79 pixels
         g.drawImage(imgboard,100,100,null);
+        g.drawImage(imgDiamond, 125, 125, null);
+        g.drawImage(imgMoon, 125, 204, null);
+        g.drawImage(imgMoon, 125, 283, null);
+        g.drawImage(imgMoon, 125, 362, null);
+        g.drawImage(imgMoon, 125, 441, null);
+        g.drawImage(imgMoon, 125, 520, null);
+        
+        //x-axis offput by 126
+        g.drawImage(imgSap, 226, 125, null);
+        g.drawImage(imgSap, 327, 125, null);
+        g.drawImage(imgSap, 428, 125, null);
+        g.drawImage(imgSap, 529, 125, null);
+        g.drawImage(imgSap, 630, 125, null);
+        g.drawImage(imgSap, 731, 125, null);
         
     }
     
