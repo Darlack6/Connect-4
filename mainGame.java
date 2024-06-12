@@ -1,4 +1,4 @@
-/**Program Name: Sinusoudial Function Simulator 
+/**Program Name: Connect 4
  * Created by: Adeline Lue Sang & Derek Lien
  * Version number: 0.2*/
 
@@ -8,9 +8,7 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.awt.*;
 import javax.swing.event.*;
-import java.io.*;
 
 public class mainGame implements ActionListener, ChangeListener{
     //Properties
@@ -20,6 +18,9 @@ public class mainGame implements ActionListener, ChangeListener{
 	helppanel hppanel = new helppanel();
 	themepanel thpanel = new themepanel();
     
+    JTextArea theChat = new JTextArea();
+    JTextField theSend = new JTextField();
+    JScrollPane theScroll = new JScrollPane(theChat);
     int intUserCol;
     public static String[][] board = new String[6][7];
     String part [] = new String [3]; 
@@ -43,11 +44,12 @@ public class mainGame implements ActionListener, ChangeListener{
 	JButton cave = new JButton("Cave Mode");
 	JButton custom = new JButton("Custom");
 	
-	JTextField ip = new JTextField("x.x.x.x");
-	JTextField port = new JTextField("xxx");
+	JTextField ipField = new JTextField("192.168.12.1");
+	JTextField portField = new JTextField("1234");
 	JLabel iplab = new JLabel("IP Address");
 	JLabel portlab = new JLabel("Port Number");
-	
+
+    SuperSocketMaster ssm;
  
     //Methods
     public void actionPerformed(ActionEvent evt){
@@ -207,8 +209,27 @@ public class mainGame implements ActionListener, ChangeListener{
                 System.out.println("win");
             }
         }else if(evt.getSource() == play){
-			theframe.setContentPane(thpanel);
-			theframe.pack();
+            if(ipField.getText().equals("") && portField.getText().equals("")){
+                theframe.setContentPane(hmpanel);
+                theframe.pack();
+                System.out.println("Enter a port number and/or IP Address\n");
+            }else if(ipField.getText().equals("") && !portField.getText().equals("")){
+                System.out.println("Starting chat in server mode\n");
+                ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()), this);
+                ssm.connect();			
+                theframe.setContentPane(thpanel);
+                theframe.pack();
+            }else if(!ipField.getText().equals("") && !portField.getText().equals("")){
+                System.out.println("Starting chat in client mode\n");
+                ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()),this);
+                ssm.connect();			
+                theframe.setContentPane(thpanel);
+                theframe.pack();
+            }else if(!ipField.getText().equals("") && portField.getText().equals("")){
+                System.out.println("Need port number or port/ip\n");
+                theframe.setContentPane(hmpanel);
+                theframe.pack();
+            }
 		}else if(evt.getSource() == help){
 			theframe.setContentPane(hppanel);
 			theframe.pack();
@@ -337,11 +358,12 @@ public class mainGame implements ActionListener, ChangeListener{
 			theplay.theme = "custom";
 			theframe.setContentPane(theplay);
 			theframe.pack();
-		}else if(evt.getSource() == ip){
-			
-		}else if(evt.getSource() == port){
-			
-		}
+		}else if(evt.getSource() == theSend){
+            ssm.sendText(theSend.getText());
+            theSend.setText("");
+        }else if(evt.getSource() == ssm){
+           theChat.append(ssm.readText() + "\n");
+        }
     }
     
     public void stateChanged(ChangeEvent evt){
@@ -352,6 +374,7 @@ public class mainGame implements ActionListener, ChangeListener{
         hmpanel.setLayout(null);
         thpanel.setLayout(null);
         hppanel.setLayout(null);
+        theplay.setLayout(null);
         
         col0.setSize(170,30);
         col1.setSize(170,30);
@@ -366,8 +389,10 @@ public class mainGame implements ActionListener, ChangeListener{
         night.setSize(320, 320);
         cave.setSize(320, 320);
         custom.setSize(320, 320);
-        ip.setSize(170, 100);
-        port.setSize(170, 100);
+        ipField.setSize(170, 100);
+        portField.setSize(170, 100);
+        theScroll.setSize(300,300);
+        theSend.setSize(300,100);
 
         col0.setLocation(1000,20);
         col1.setLocation(1000,50);
@@ -382,8 +407,10 @@ public class mainGame implements ActionListener, ChangeListener{
         night.setLocation(640, 10);
         cave.setLocation(300, 350);
 		custom.setLocation(640, 350);
-		ip.setLocation(590, 440);
-        port.setLocation(590, 540);
+		ipField.setLocation(590, 440);
+        portField.setLocation(590, 540);
+        theScroll.setLocation(0,0);
+        theSend.setLocation(0,310);
 
         col0.addActionListener(this);
         col1.addActionListener(this);
@@ -398,10 +425,10 @@ public class mainGame implements ActionListener, ChangeListener{
         night.addActionListener(this);
         cave.addActionListener(this);
         custom.addActionListener(this);
-        
-        ip.addActionListener(this);
-        port.addActionListener(this);
-        
+        theSend.addActionListener(this);
+
+        theChat.setEnabled(false);
+
         theplay.add(col0);
         theplay.add(col1);
         theplay.add(col2);
@@ -409,14 +436,16 @@ public class mainGame implements ActionListener, ChangeListener{
         theplay.add(col4);
         theplay.add(col5);
         theplay.add(col6);
+        theplay.add(theScroll);
+        theplay.add(theSend);
         hmpanel.add(play);
         hmpanel.add(help);
         thpanel.add(day);
         thpanel.add(night);
         thpanel.add(cave);
         thpanel.add(custom);
-        hmpanel.add(ip);
-        hmpanel.add(port);
+        hmpanel.add(ipField);
+        hmpanel.add(portField);
         
 		play.setHorizontalAlignment(JButton.CENTER);
 		help.setHorizontalAlignment(JButton.CENTER);
