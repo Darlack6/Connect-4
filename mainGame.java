@@ -1,3 +1,7 @@
+/**Program Name: Sinusoudial Function Simulator 
+ * Created by: Adeline Lue Sang & Derek Lien
+ * Version number: 0.2*/
+
 import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.*;
