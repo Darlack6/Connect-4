@@ -210,25 +210,29 @@ public class mainGame implements ActionListener, ChangeListener{
             }
         }else if(evt.getSource() == play){
             if(ipField.getText().equals("") && portField.getText().equals("")){
+                System.out.println("Enter a port number and/or IP Address\n");
                 theframe.setContentPane(hmpanel);
                 theframe.pack();
-                System.out.println("Enter a port number and/or IP Address\n");
+                theframe.repaint();
             }else if(ipField.getText().equals("") && !portField.getText().equals("")){
                 System.out.println("Starting chat in server mode\n");
+                theframe.setContentPane(thpanel);
+                theframe.pack();
+                theframe.repaint();
                 ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()), this);
                 ssm.connect();			
-                theframe.setContentPane(thpanel);
-                theframe.pack();
             }else if(!ipField.getText().equals("") && !portField.getText().equals("")){
                 System.out.println("Starting chat in client mode\n");
-                ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()),this);
-                ssm.connect();			
                 theframe.setContentPane(thpanel);
                 theframe.pack();
+                theframe.repaint();
+                ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()),this);
+                ssm.connect();			
             }else if(!ipField.getText().equals("") && portField.getText().equals("")){
                 System.out.println("Need port number or port/ip\n");
                 theframe.setContentPane(hmpanel);
                 theframe.pack();
+                theframe.repaint();
             }
 		}else if(evt.getSource() == help){
 			theframe.setContentPane(hppanel);
