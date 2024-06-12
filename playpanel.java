@@ -30,7 +30,7 @@ public class playpanel extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(imgbg,0,0,null);
-        g.drawImage(imgboard,250,100,null);
+        g.drawImage(imgboard,100,100,null);
         
     }
     
@@ -47,13 +47,12 @@ public class playpanel extends JPanel{
 			imgDbg = ImageIO.read(new File("daybg.png"));
 			imgNbg = ImageIO.read(new File("nightbg.png"));
 			
-			imgFlower = ImageIO.read(new File("flower.jpg"));
-			imgSun = ImageIO.read(new File("sun.jpg"));
-			imgDiamond = ImageIO.read(new File("diamond.jpg"));
-			
-			imgSap = ImageIO.read(new File("sapphire.jpg"));
-			imgMoon = ImageIO.read(new File("moon.jpg"));
-			imgStar = ImageIO.read(new File("star.jpg"));
+			imgFlower = ImageIO.read(new File("flower.png"));
+			imgSun = ImageIO.read(new File("sun.png"));
+			imgDiamond = ImageIO.read(new File("diamond.png"));
+			imgSap = ImageIO.read(new File("sapphire.png"));
+			imgMoon = ImageIO.read(new File("moon.png"));
+			imgStar = ImageIO.read(new File("star.png"));
 		
 		}catch(IOException e){
         }
