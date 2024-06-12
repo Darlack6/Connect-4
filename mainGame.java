@@ -337,15 +337,14 @@ public class mainGame implements ActionListener, ChangeListener{
 			theplay.theme = "custom";
 			theframe.setContentPane(theplay);
 			theframe.pack();
-		}
-    }
-    
-    public void stateChanged(ChangeEvent evt){
-		if(evt.getSource() == ip){
+		}else if(evt.getSource() == ip){
 			
 		}else if(evt.getSource() == port){
 			
 		}
+    }
+    
+    public void stateChanged(ChangeEvent evt){
 	}
     
     //Constructor
@@ -400,10 +399,9 @@ public class mainGame implements ActionListener, ChangeListener{
         cave.addActionListener(this);
         custom.addActionListener(this);
         
-        ip.addChangeListener(this);
-        port.addChangeListener(this);
+        ip.addActionListener(this);
+        port.addActionListener(this);
         
-
         theplay.add(col0);
         theplay.add(col1);
         theplay.add(col2);
