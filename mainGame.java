@@ -1,11 +1,18 @@
+/**Program Name: Sinusoudial Function Simulator 
+ * Created by: Adeline Lue Sang & Derek Lien
+ * Version number: 0.2*/
+
 import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.awt.*;
+import javax.swing.event.*;
+import java.io.*;
 
-public class mainGame implements ActionListener{
+public class mainGame implements ActionListener, ChangeListener{
     //Properties
     JFrame theframe = new JFrame("Connect-4");
     playpanel theplay = new playpanel();
@@ -35,7 +42,13 @@ public class mainGame implements ActionListener{
 	JButton night = new JButton("Night Mode");
 	JButton cave = new JButton("Cave Mode");
 	JButton custom = new JButton("Custom");
-
+	
+	JTextField ip = new JTextField("x.x.x.x");
+	JTextField port = new JTextField("xxx");
+	JLabel iplab = new JLabel("IP Address");
+	JLabel portlab = new JLabel("Port Number");
+	
+ 
     //Methods
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == col0){
@@ -326,6 +339,15 @@ public class mainGame implements ActionListener{
 			theframe.pack();
 		}
     }
+    
+    public void stateChanged(ChangeEvent evt){
+		if(evt.getSource() == ip){
+			
+		}else if(evt.getSource() == port){
+			
+		}
+	}
+    
     //Constructor
     public mainGame(){
         hmpanel.setLayout(null);
@@ -345,6 +367,8 @@ public class mainGame implements ActionListener{
         night.setSize(320, 320);
         cave.setSize(320, 320);
         custom.setSize(320, 320);
+        ip.setSize(170, 100);
+        port.setSize(170, 100);
 
         col0.setLocation(1000,20);
         col1.setLocation(1000,50);
@@ -353,12 +377,14 @@ public class mainGame implements ActionListener{
         col4.setLocation(1000,140);
         col5.setLocation(1000,170);
         col6.setLocation(1000,200);
-        play.setLocation(490, 440);
-        help.setLocation(490, 540);
+        play.setLocation(290, 440);
+        help.setLocation(290, 540);
         day.setLocation(300, 10);
         night.setLocation(640, 10);
         cave.setLocation(300, 350);
 		custom.setLocation(640, 350);
+		ip.setLocation(590, 440);
+        port.setLocation(590, 540);
 
         col0.addActionListener(this);
         col1.addActionListener(this);
@@ -373,6 +399,10 @@ public class mainGame implements ActionListener{
         night.addActionListener(this);
         cave.addActionListener(this);
         custom.addActionListener(this);
+        
+        ip.addChangeListener(this);
+        port.addChangeListener(this);
+        
 
         theplay.add(col0);
         theplay.add(col1);
@@ -387,6 +417,8 @@ public class mainGame implements ActionListener{
         thpanel.add(night);
         thpanel.add(cave);
         thpanel.add(custom);
+        hmpanel.add(ip);
+        hmpanel.add(port);
         
 		play.setHorizontalAlignment(JButton.CENTER);
 		help.setHorizontalAlignment(JButton.CENTER);
