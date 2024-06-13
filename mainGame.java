@@ -98,7 +98,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
         }else if(evt.getSource() == col2){
             if(blnHostPlayerTurn==true){
@@ -121,7 +121,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
         }else if(evt.getSource() == col3){
             if(blnHostPlayerTurn==true){
@@ -144,7 +144,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
         }else if(evt.getSource() == col4){
             if(blnHostPlayerTurn==true){
@@ -167,7 +167,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
         }else if(evt.getSource() == col5){
             if(blnHostPlayerTurn==true){
@@ -190,7 +190,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
         }else if(evt.getSource() == col6){
             if(blnHostPlayerTurn==true){
@@ -213,7 +213,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
         }else if(evt.getSource() == play){
             if(ipField.getText().equals("") && portField.getText().equals("")){
@@ -379,7 +379,6 @@ public class mainGame implements ActionListener, ChangeListener{
             if(gameInfo(ssm.readText()) == true){
                 placeMove(Character.getNumericValue(ssm.readText().charAt(4)), board, strPlayer);
                 blnWin = winCheck(board, strPlayer);
-                System.out.println("PLESEESEEEE");
                 for(int intRow=0;intRow<6;intRow++){
                     for(int intCol=0;intCol<7;intCol++){
                         System.out.print(board[intRow][intCol]);
@@ -390,6 +389,7 @@ public class mainGame implements ActionListener, ChangeListener{
                     System.out.println("You lost");
                 }
                 blnHostPlayerTurn=true;
+                System.out.println("Your turn");
             }else{
                 theChat.append("Opponent: "+ssm.readText() + "\n");
             }
@@ -609,14 +609,17 @@ public class mainGame implements ActionListener, ChangeListener{
 		return part;
 	}public static boolean gameInfo(String strText){
         String strVerify = "";
-        for (int i = 0; i < 4; i++){
-            char c = strText.charAt(i);   
-            strVerify = strVerify+c;
+        try{
+            for (int i = 0; i < 4; i++){
+                char c = strText.charAt(i);   
+                strVerify = strVerify+c;
+            }
+            if(strVerify.equals("game")){
+                return true;
+            }
+            return false;
+        }catch(IndexOutOfBoundsException e){
+            return false;
         }
-        System.out.println(strVerify);
-        if(strVerify.equals("game")){
-            return true;
-        }
-        return false;
     }
 }
