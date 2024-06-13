@@ -25,29 +25,33 @@ public class playpanel extends JPanel{
     BufferedImage imgp1; 
     BufferedImage imgp2; 
     
+    int intCol;
+    int intRow;
+    int intfall;
+    int intC;
+    boolean blnloop = false;
     
+
     /**methods*/
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(imgbg,0,0,null);
-        
-        //y-axis offput by 79 pixels
         g.drawImage(imgboard,100,100,null);
-        g.drawImage(imgDiamond, 125, 125, null);
-        g.drawImage(imgMoon, 125, 204, null);
-        g.drawImage(imgMoon, 125, 283, null);
-        g.drawImage(imgMoon, 125, 362, null);
-        g.drawImage(imgMoon, 125, 441, null);
-        g.drawImage(imgMoon, 125, 520, null);
+		
+		if(intfall > 0 && intfall < 10){
+			g.drawImage(imgp1, intC*100 + 125, intfall*10 + 50, null);
+			System.out.println("drawn");
+		}
         
-        //x-axis offput by 126
-        g.drawImage(imgSap, 226, 125, null);
-        g.drawImage(imgSap, 327, 125, null);
-        g.drawImage(imgSap, 428, 125, null);
-        g.drawImage(imgSap, 529, 125, null);
-        g.drawImage(imgSap, 630, 125, null);
-        g.drawImage(imgSap, 731, 125, null);
-        
+        for(intRow = 0; intRow < 6; intRow++){
+			for(intCol = 0; intCol < 7; intCol++){
+				if(mainGame.board[intRow][intCol] == "x"){
+					g.drawImage(imgp1, intCol*100 + 125, (5-intRow)*-80+520, null);
+				}else if(mainGame.board[intRow][intCol] == "o"){
+					g.drawImage(imgp2, intCol*101 + 125, (5-intRow)*-80+520, null);
+				}
+			}
+		}
     }
     
     /**constructor*/

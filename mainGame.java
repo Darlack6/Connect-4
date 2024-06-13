@@ -27,15 +27,16 @@ public class mainGame implements ActionListener, ChangeListener{
 
     String strPlayer = "x";
     Boolean blnWin = false;
+   
     //buttons
 
-    JButton col0 = new JButton("Column 0");
-    JButton col1 = new JButton("Column 1");
-    JButton col2 = new JButton("Column 2");
-    JButton col3 = new JButton("Column 3");
-    JButton col4 = new JButton("Column 4");
-    JButton col5 = new JButton("Column 5");
-    JButton col6 = new JButton("Column 6");
+    JButton col0 = new JButton("Column 1");
+    JButton col1 = new JButton("Column 2");
+    JButton col2 = new JButton("Column 3");
+    JButton col3 = new JButton("Column 4");
+    JButton col4 = new JButton("Column 5");
+    JButton col5 = new JButton("Column 6");
+    JButton col6 = new JButton("Column 7");
 	
 	JButton play = new JButton("Play");
 	JButton help = new JButton("Help");
@@ -54,7 +55,25 @@ public class mainGame implements ActionListener, ChangeListener{
     //Methods
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == col0){
+			
             intUserCol = 0;
+            
+            theplay.intC = 0;
+            theplay.intfall = 0;
+            
+            for(int i = 0; i < 10; i++){
+				theplay.intfall += 1;
+				System.out.println(theplay.intfall);
+				theplay.repaint();
+				try{
+					Thread.sleep(100);
+				}catch(InterruptedException e){
+					System.out.println("exception");
+				}
+			}
+			
+			theplay.intfall = 10;
+            
             board = placeMove(intUserCol, board, strPlayer);
             blnWin = winCheck(board, strPlayer);
             
@@ -75,6 +94,8 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("win");
             }
+            
+            theplay.repaint();
         }else if(evt.getSource() == col1){
             intUserCol = 1;
             board = placeMove(intUserCol, board, strPlayer);
@@ -97,6 +118,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col2){
             intUserCol = 2;
             board = placeMove(intUserCol, board, strPlayer);
@@ -119,6 +141,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("win");
             }
+            theplay.repaint();
         }
         if(evt.getSource() == col3){
             intUserCol = 3;
@@ -142,6 +165,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col4){
             intUserCol = 4;
             board = placeMove(intUserCol, board, strPlayer);
@@ -164,6 +188,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col5){
             intUserCol = 5;
             board = placeMove(intUserCol, board, strPlayer);
@@ -186,6 +211,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col6){
             intUserCol = 6;
             board = placeMove(intUserCol, board, strPlayer);
@@ -208,6 +234,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == play){
             if(ipField.getText().equals("") && portField.getText().equals("")){
                 System.out.println("Enter a port number and/or IP Address\n");
@@ -238,7 +265,9 @@ public class mainGame implements ActionListener, ChangeListener{
 			theframe.setContentPane(hppanel);
 			theframe.pack();
 		}else if(evt.getSource() == day){
+	
             part = themer("day");
+            System.out.println(part[0]+" "+part[1]+" "+part[2]);
             if(part[0].equals("day")){
                 theplay.imgbg = theplay.imgDbg;
                 theplay.imgboard = theplay.imgDBoard;
@@ -250,19 +279,19 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1] == "flower"){
+            if(part[1].equals("flower")){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1] == "moon"){
+            }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1] == "diamond"){
+            }else if(part[1].equals("diamond")){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2] == "star"){
+            }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2] == "sapphire"){
+            }else if(part[2].equals("sapphire")){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "day";
@@ -281,19 +310,19 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1] == "flower"){
+            if(part[1].equals("flower")){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1] == "moon"){
+            }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1] == "diamond"){
+            }else if(part[1].equals("diamond")){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2] == "star"){
+            }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2] == "sapphire"){
+            }else if(part[2].equals("sapphire")){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "night";
@@ -313,19 +342,19 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1] == "flower"){
+            if(part[1].equals("flower")){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1] == "moon"){
+            }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1] == "diamond"){
+            }else if(part[1].equals("diamond")){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2] == "star"){
+            }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2] == "sapphire"){
+            }else if(part[2].equals("sapphire")){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "cave";
@@ -387,34 +416,34 @@ public class mainGame implements ActionListener, ChangeListener{
         col4.setSize(170,30);
         col5.setSize(170,30);
         col6.setSize(170,30);
-        play.setSize(300, 75);
+        play.setSize(300, 80);
         day.setSize(320, 320);
-        help.setSize(300, 75);
+        help.setSize(300, 80);
         night.setSize(320, 320);
         cave.setSize(320, 320);
         custom.setSize(320, 320);
-        ipField.setSize(170, 100);
-        portField.setSize(170, 100);
-        theScroll.setSize(300,300);
-        theSend.setSize(300,100);
+        ipField.setSize(250, 85);
+        portField.setSize(250, 85);
+        theScroll.setSize(360,300);
+        theSend.setSize(360,40);
 
-        col0.setLocation(1000,20);
-        col1.setLocation(1000,50);
-        col2.setLocation(1000,80);
-        col3.setLocation(1000,110);
-        col4.setLocation(1000,140);
-        col5.setLocation(1000,170);
-        col6.setLocation(1000,200);
-        play.setLocation(290, 440);
-        help.setLocation(290, 540);
+        col0.setLocation(880,100);
+        col1.setLocation(1065,100);
+        col2.setLocation(880,140);
+        col3.setLocation(1065,140);
+        col4.setLocation(880,180);
+        col5.setLocation(1065,180);
+        col6.setLocation(975,220);
+        play.setLocation(360, 350);
+        help.setLocation(360, 440);
         day.setLocation(300, 10);
         night.setLocation(640, 10);
         cave.setLocation(300, 350);
 		custom.setLocation(640, 350);
-		ipField.setLocation(590, 440);
-        portField.setLocation(590, 540);
-        theScroll.setLocation(0,0);
-        theSend.setLocation(0,310);
+		ipField.setLocation(700, 350);
+        portField.setLocation(700, 435);
+        theScroll.setLocation(880,260);
+        theSend.setLocation(880,560);
 
         col0.addActionListener(this);
         col1.addActionListener(this);
