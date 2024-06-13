@@ -96,6 +96,8 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("You win");
             }
+            theframe.setContentPane(theplay);
+            theframe.pack();
             theplay.repaint();
         }else if(evt.getSource() == col1){
             if(blnHostPlayerTurn==true){
@@ -117,8 +119,11 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
+            theframe.setContentPane(theplay);
+            theframe.pack();
+            theplay.repaint();
         }else if(evt.getSource() == col2){
             if(blnHostPlayerTurn==true){
                 strPlayer = "x";
@@ -140,8 +145,10 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
+            theframe.setContentPane(theplay);
+            theframe.pack();
             theplay.repaint();
         }else if(evt.getSource() == col3){
             if(blnHostPlayerTurn==true){
@@ -164,8 +171,10 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
+            theframe.setContentPane(theplay);
+            theframe.pack();
             theplay.repaint();
         }else if(evt.getSource() == col4){
             if(blnHostPlayerTurn==true){
@@ -188,8 +197,10 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
+            theframe.setContentPane(theplay);
+            theframe.pack();
             theplay.repaint();
         }else if(evt.getSource() == col5){
             if(blnHostPlayerTurn==true){
@@ -212,8 +223,10 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
+            theframe.setContentPane(theplay);
+            theframe.pack();
             theplay.repaint();
         }else if(evt.getSource() == col6){
             if(blnHostPlayerTurn==true){
@@ -236,8 +249,10 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "o";
             }
             if(blnWin == true){
-                System.out.println("Host win");
+                System.out.println("You win");
             }
+            theframe.setContentPane(theplay);
+            theframe.pack();
             theplay.repaint();
         }else if(evt.getSource() == play){
             if(ipField.getText().equals("") && portField.getText().equals("")){
@@ -405,7 +420,9 @@ public class mainGame implements ActionListener, ChangeListener{
             if(gameInfo(ssm.readText()) == true){
                 placeMove(Character.getNumericValue(ssm.readText().charAt(4)), board, strPlayer);
                 blnWin = winCheck(board, strPlayer);
-                System.out.println("PLESEESEEEE");
+                theframe.setContentPane(theplay);
+                theframe.pack();
+                theplay.repaint();
                 for(int intRow=0;intRow<6;intRow++){
                     for(int intCol=0;intCol<7;intCol++){
                         System.out.print(board[intRow][intCol]);
