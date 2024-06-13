@@ -32,13 +32,13 @@ public class mainGame implements ActionListener, ChangeListener{
     int intCounter;
     //buttons
 
-    JButton col0 = new JButton("Column 0");
-    JButton col1 = new JButton("Column 1");
-    JButton col2 = new JButton("Column 2");
-    JButton col3 = new JButton("Column 3");
-    JButton col4 = new JButton("Column 4");
-    JButton col5 = new JButton("Column 5");
-    JButton col6 = new JButton("Column 6");
+    JButton col0 = new JButton("Column 1");
+    JButton col1 = new JButton("Column 2");
+    JButton col2 = new JButton("Column 3");
+    JButton col3 = new JButton("Column 4");
+    JButton col4 = new JButton("Column 5");
+    JButton col5 = new JButton("Column 6");
+    JButton col6 = new JButton("Column 7");
 	
 	JButton play = new JButton("Play");
 	JButton help = new JButton("Help");
@@ -61,7 +61,8 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 0;
                 
-                theplay.intC = 0;
+                //animation attempt
+                /*theplay.intC = 0;
 				theplay.intfall = 0;
             
 				for(int i = 0; i < 10; i++){
@@ -75,7 +76,7 @@ public class mainGame implements ActionListener, ChangeListener{
 					}
 				}
 			
-				theplay.intfall = 10;
+				theplay.intfall = 10;*/
                 
                 board = placeMove(intUserCol, board, strPlayer);
                 blnWin = winCheck(board, strPlayer);
@@ -95,6 +96,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("You win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col1){
             if(blnHostPlayerTurn==true){
                 strPlayer = "x";
@@ -140,6 +142,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("Host win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col3){
             if(blnHostPlayerTurn==true){
                 strPlayer = "x";
@@ -163,6 +166,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("Host win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col4){
             if(blnHostPlayerTurn==true){
                 strPlayer = "x";
@@ -186,6 +190,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("Host win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col5){
             if(blnHostPlayerTurn==true){
                 strPlayer = "x";
@@ -209,6 +214,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("Host win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == col6){
             if(blnHostPlayerTurn==true){
                 strPlayer = "x";
@@ -232,6 +238,7 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("Host win");
             }
+            theplay.repaint();
         }else if(evt.getSource() == play){
             if(ipField.getText().equals("") && portField.getText().equals("")){
                 System.out.println("Enter a port number and/or IP Address\n");
@@ -276,24 +283,26 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1] == "flower"){
+            if(part[1].equals("flower")){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1] == "moon"){
+            }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1] == "diamond"){
+            }else if(part[1].equals("diamond")){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
             if(part[2] == "sun"){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2] == "star"){
+            }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2] == "sapphire"){
+            }else if(part[2].equals("sapphire")){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "day";
 			theframe.setContentPane(theplay);
 			theframe.pack();
+			
+			theplay.repaint();
 		}else if(evt.getSource() == night){
             part = themer("night");
             if(part[0].equals("day")){
@@ -307,19 +316,19 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1] == "flower"){
+            if(part[1].equals("flower")){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1] == "moon"){
+            }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1] == "diamond"){
+            }else if(part[1].equals("diamond")){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2] == "star"){
+            }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2] == "sapphire"){
+            }else if(part[2].equals("sapphire")){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "night";
@@ -339,19 +348,19 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1] == "flower"){
+            if(part[1].equals("flower")){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1] == "moon"){
+            }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1] == "diamond"){
+            }else if(part[1].equals("diamond")){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
             if(part[2] == "sun"){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2] == "star"){
+            }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2] == "sapphire"){
+            }else if(part[2].equals("sapphire")){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "cave";
@@ -372,17 +381,17 @@ public class mainGame implements ActionListener, ChangeListener{
             
             if(part[1] == "flower"){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1] == "moon"){
+            }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1] == "diamond"){
+            }else if(part[1].equals("diamond")){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
             if(part[2] == "sun"){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2] == "star"){
+            }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2] == "sapphire"){
+            }else if(part[2].equals("sapphire")){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "custom";
@@ -430,34 +439,34 @@ public class mainGame implements ActionListener, ChangeListener{
         col4.setSize(170,30);
         col5.setSize(170,30);
         col6.setSize(170,30);
-        play.setSize(300, 75);
+        play.setSize(300, 90);
         day.setSize(320, 320);
-        help.setSize(300, 75);
+        help.setSize(300, 90);
         night.setSize(320, 320);
         cave.setSize(320, 320);
         custom.setSize(320, 320);
-        ipField.setSize(170, 100);
-        portField.setSize(170, 100);
-        theScroll.setSize(300,300);
-        theSend.setSize(300,100);
+        ipField.setSize(280, 95);
+        portField.setSize(280, 95);
+        theSend.setSize(350, 40);
+        theScroll.setSize(350, 300);
 
-        col0.setLocation(1000,20);
-        col1.setLocation(1000,50);
-        col2.setLocation(1000,80);
-        col3.setLocation(1000,110);
-        col4.setLocation(1000,140);
-        col5.setLocation(1000,170);
-        col6.setLocation(1000,200);
-        play.setLocation(290, 440);
-        help.setLocation(290, 540);
+        col0.setLocation(890,120);
+        col1.setLocation(1070,120);
+        col2.setLocation(890,160);
+        col3.setLocation(1070,160);
+        col4.setLocation(890,200);
+        col5.setLocation(1070,200);
+        col6.setLocation(990,240);
+        play.setLocation(360, 350);
+        help.setLocation(360, 450);
         day.setLocation(300, 10);
         night.setLocation(640, 10);
         cave.setLocation(300, 350);
 		custom.setLocation(640, 350);
-		ipField.setLocation(590, 440);
-        portField.setLocation(590, 540);
-        theScroll.setLocation(0,0);
-        theSend.setLocation(0,310);
+		ipField.setLocation(680, 350);
+        portField.setLocation(680, 445);
+        theSend.setLocation(890, 600);
+        theScroll.setLocation(890, 300);
 
         col0.addActionListener(this);
         col1.addActionListener(this);
