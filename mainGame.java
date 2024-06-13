@@ -62,7 +62,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 intUserCol = 0;
                 
                 //animation attempt
-                /*theplay.intC = 0;
+                theplay.intC = 0;
 				theplay.intfall = 0;
             
 				for(int i = 0; i < 10; i++){
@@ -76,7 +76,7 @@ public class mainGame implements ActionListener, ChangeListener{
 					}
 				}
 			
-				theplay.intfall = 10;*/
+				theplay.intfall = 10;
                 
                 board = placeMove(intUserCol, board, strPlayer);
                 blnWin = winCheck(board, strPlayer);
@@ -119,6 +119,8 @@ public class mainGame implements ActionListener, ChangeListener{
             if(blnWin == true){
                 System.out.println("Host win");
             }
+            
+            theplay.repaint();
         }else if(evt.getSource() == col2){
             if(blnHostPlayerTurn==true){
                 strPlayer = "x";
@@ -291,7 +293,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
             }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
@@ -356,7 +358,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
             }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
@@ -379,7 +381,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1] == "flower"){
+            if(part[1].equals("flower")){
                 theplay.imgp1 = theplay.imgFlower;
             }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
@@ -387,7 +389,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
             }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
