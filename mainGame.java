@@ -2,6 +2,7 @@
  * Created by: Adeline Lue Sang & Derek Lien
  * Version number: 0.2*/
 
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.*;
@@ -25,18 +26,19 @@ public class mainGame implements ActionListener, ChangeListener{
     public static String[][] board = new String[6][7];
     String part [] = new String [3]; 
 
-    String strPlayer = "x";
+    String strPlayer = "o";
+    Boolean blnHostPlayerTurn;
     Boolean blnWin = false;
-   
+    int intCounter;
     //buttons
 
-    JButton col0 = new JButton("Column 1");
-    JButton col1 = new JButton("Column 2");
-    JButton col2 = new JButton("Column 3");
-    JButton col3 = new JButton("Column 4");
-    JButton col4 = new JButton("Column 5");
-    JButton col5 = new JButton("Column 6");
-    JButton col6 = new JButton("Column 7");
+    JButton col0 = new JButton("Column 0");
+    JButton col1 = new JButton("Column 1");
+    JButton col2 = new JButton("Column 2");
+    JButton col3 = new JButton("Column 3");
+    JButton col4 = new JButton("Column 4");
+    JButton col5 = new JButton("Column 5");
+    JButton col6 = new JButton("Column 6");
 	
 	JButton play = new JButton("Play");
 	JButton help = new JButton("Help");
@@ -45,7 +47,7 @@ public class mainGame implements ActionListener, ChangeListener{
 	JButton cave = new JButton("Cave Mode");
 	JButton custom = new JButton("Custom");
 	
-	JTextField ipField = new JTextField("192.168.12.1");
+	JTextField ipField = new JTextField("");
 	JTextField portField = new JTextField("1234");
 	JLabel iplab = new JLabel("IP Address");
 	JLabel portlab = new JLabel("Port Number");
@@ -55,186 +57,181 @@ public class mainGame implements ActionListener, ChangeListener{
     //Methods
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == col0){
-			
-            intUserCol = 0;
+            if(blnHostPlayerTurn==true){
+                strPlayer = "x";
+                intUserCol = 0;
+                
+                theplay.intC = 0;
+				theplay.intfall = 0;
             
-            theplay.intC = 0;
-            theplay.intfall = 0;
-            
-            for(int i = 0; i < 10; i++){
-				theplay.intfall += 1;
-				System.out.println(theplay.intfall);
-				theplay.repaint();
-				try{
-					Thread.sleep(100);
-				}catch(InterruptedException e){
-					System.out.println("exception");
+				for(int i = 0; i < 10; i++){
+					theplay.intfall += 1;
+					System.out.println(theplay.intfall);
+					theplay.repaint();
+					try{
+						Thread.sleep(100);
+					}catch(InterruptedException e){
+						System.out.println("exception");
+					}
 				}
-			}
 			
-			theplay.intfall = 10;
-            
-            board = placeMove(intUserCol, board, strPlayer);
-            blnWin = winCheck(board, strPlayer);
-            
-            for(int intRow=0;intRow<6;intRow++){
-                for(int intCol=0;intCol<7;intCol++){
-                    System.out.print(board[intRow][intCol]);
+				theplay.intfall = 10;
+                
+                board = placeMove(intUserCol, board, strPlayer);
+                blnWin = winCheck(board, strPlayer);
+                ssm.sendText("game0");
+                blnHostPlayerTurn=false;
+                intCounter++;
+                System.out.println(intCounter);
+
+                for(int intRow=0;intRow<6;intRow++){
+                    for(int intCol=0;intCol<7;intCol++){
+                        System.out.print(board[intRow][intCol]);
+                    }
+                    System.out.println("\n");
                 }
-                System.out.println("\n");
+                strPlayer = "o";
             }
-            System.out.println(blnWin);
-
-            if(strPlayer.equals("x")){
-				strPlayer = "o";
-			}else{
-				strPlayer = "x";
-			}
-
             if(blnWin == true){
-                System.out.println("win");
+                System.out.println("You win");
             }
-            
-            theplay.repaint();
         }else if(evt.getSource() == col1){
-            intUserCol = 1;
-            board = placeMove(intUserCol, board, strPlayer);
-            blnWin = winCheck(board, strPlayer);
-            
-            for(int intRow=0;intRow<6;intRow++){
-                for(int intCol=0;intCol<7;intCol++){
-                    System.out.print(board[intRow][intCol]);
+            if(blnHostPlayerTurn==true){
+                strPlayer = "x";
+                intUserCol = 1;
+                board = placeMove(intUserCol, board, strPlayer);
+                blnWin = winCheck(board, strPlayer);
+                ssm.sendText("game1");
+                blnHostPlayerTurn=false;
+                intCounter++;
+                System.out.println(intCounter);
+
+                for(int intRow=0;intRow<6;intRow++){
+                    for(int intCol=0;intCol<7;intCol++){
+                        System.out.print(board[intRow][intCol]);
+                    }
+                    System.out.println("\n");
                 }
-                System.out.println("\n");
+                strPlayer = "o";
             }
-            System.out.println(blnWin);
-
-            if(strPlayer.equals("x")){
-				strPlayer = "o";
-			}else{
-				strPlayer = "x";
-			}
-
             if(blnWin == true){
-                System.out.println("win");
+                System.out.println("Host win");
             }
-            theplay.repaint();
         }else if(evt.getSource() == col2){
-            intUserCol = 2;
-            board = placeMove(intUserCol, board, strPlayer);
-            blnWin = winCheck(board, strPlayer);
-            
-            for(int intRow=0;intRow<6;intRow++){
-                for(int intCol=0;intCol<7;intCol++){
-                    System.out.print(board[intRow][intCol]);
+            if(blnHostPlayerTurn==true){
+                strPlayer = "x";
+                intUserCol = 2;
+                board = placeMove(intUserCol, board, strPlayer);
+                blnWin = winCheck(board, strPlayer);
+                ssm.sendText("game2");
+                blnHostPlayerTurn=false;
+                intCounter++;
+                System.out.println(intCounter);
+
+                for(int intRow=0;intRow<6;intRow++){
+                    for(int intCol=0;intCol<7;intCol++){
+                        System.out.print(board[intRow][intCol]);
+                    }
+                    System.out.println("\n");
                 }
-                System.out.println("\n");
+
+                strPlayer = "o";
             }
-            System.out.println(blnWin);
-
-            if(strPlayer.equals("x")){
-				strPlayer = "o";
-			}else{
-				strPlayer = "x";
-			}
-
             if(blnWin == true){
-                System.out.println("win");
+                System.out.println("Host win");
             }
-            theplay.repaint();
-        }
-        if(evt.getSource() == col3){
-            intUserCol = 3;
-            board = placeMove(intUserCol, board, strPlayer);
-            blnWin = winCheck(board, strPlayer);
-            
-            for(int intRow=0;intRow<6;intRow++){
-                for(int intCol=0;intCol<7;intCol++){
-                    System.out.print(board[intRow][intCol]);
+        }else if(evt.getSource() == col3){
+            if(blnHostPlayerTurn==true){
+                strPlayer = "x";
+                intUserCol = 3;
+                board = placeMove(intUserCol, board, strPlayer);
+                blnWin = winCheck(board, strPlayer);
+                ssm.sendText("game3");
+                blnHostPlayerTurn=false;
+                intCounter++;
+                System.out.println(intCounter);
+
+                for(int intRow=0;intRow<6;intRow++){
+                    for(int intCol=0;intCol<7;intCol++){
+                        System.out.print(board[intRow][intCol]);
+                    }
+                    System.out.println("\n");
                 }
-                System.out.println("\n");
+
+                strPlayer = "o";
             }
-            System.out.println(blnWin);
-
-            if(strPlayer.equals("x")){
-				strPlayer = "o";
-			}else{
-				strPlayer = "x";
-			}
-
             if(blnWin == true){
-                System.out.println("win");
+                System.out.println("Host win");
             }
-            theplay.repaint();
         }else if(evt.getSource() == col4){
-            intUserCol = 4;
-            board = placeMove(intUserCol, board, strPlayer);
-            blnWin = winCheck(board, strPlayer);
-            
-            for(int intRow=0;intRow<6;intRow++){
-                for(int intCol=0;intCol<7;intCol++){
-                    System.out.print(board[intRow][intCol]);
+            if(blnHostPlayerTurn==true){
+                strPlayer = "x";
+                intUserCol = 4;
+                board = placeMove(intUserCol, board, strPlayer);
+                blnWin = winCheck(board, strPlayer);
+                ssm.sendText("game4");
+                blnHostPlayerTurn=false;
+                intCounter++;
+                System.out.println(intCounter);
+
+                for(int intRow=0;intRow<6;intRow++){
+                    for(int intCol=0;intCol<7;intCol++){
+                        System.out.print(board[intRow][intCol]);
+                    }
+                    System.out.println("\n");
                 }
-                System.out.println("\n");
+
+                strPlayer = "o";
             }
-            System.out.println(blnWin);
-
-            if(strPlayer.equals("x")){
-				strPlayer = "o";
-			}else{
-				strPlayer = "x";
-			}
-
             if(blnWin == true){
-                System.out.println("win");
+                System.out.println("Host win");
             }
-            theplay.repaint();
         }else if(evt.getSource() == col5){
-            intUserCol = 5;
-            board = placeMove(intUserCol, board, strPlayer);
-            blnWin = winCheck(board, strPlayer);
-            
-            for(int intRow=0;intRow<6;intRow++){
-                for(int intCol=0;intCol<7;intCol++){
-                    System.out.print(board[intRow][intCol]);
+            if(blnHostPlayerTurn==true){
+                strPlayer = "x";
+                intUserCol = 5;
+                board = placeMove(intUserCol, board, strPlayer);
+                blnWin = winCheck(board, strPlayer);
+                ssm.sendText("game5");
+                blnHostPlayerTurn=false;
+                intCounter++;
+                System.out.println(intCounter);
+
+                for(int intRow=0;intRow<6;intRow++){
+                    for(int intCol=0;intCol<7;intCol++){
+                        System.out.print(board[intRow][intCol]);
+                    }
+                    System.out.println("\n");
                 }
-                System.out.println("\n");
+
+                strPlayer = "o";
             }
-            System.out.println(blnWin);
-
-            if(strPlayer.equals("x")){
-				strPlayer = "o";
-			}else{
-				strPlayer = "x";
-			}
-
             if(blnWin == true){
-                System.out.println("win");
+                System.out.println("Host win");
             }
-            theplay.repaint();
         }else if(evt.getSource() == col6){
-            intUserCol = 6;
-            board = placeMove(intUserCol, board, strPlayer);
-            blnWin = winCheck(board, strPlayer);
-            
-            for(int intRow=0;intRow<6;intRow++){
-                for(int intCol=0;intCol<7;intCol++){
-                    System.out.print(board[intRow][intCol]);
+            if(blnHostPlayerTurn==true){
+                strPlayer = "x";
+                intUserCol = 6;
+                board = placeMove(intUserCol, board, strPlayer);
+                blnWin = winCheck(board, strPlayer);
+                ssm.sendText("game6");
+                blnHostPlayerTurn=false;
+                intCounter++;
+                System.out.println(intCounter);
+
+                for(int intRow=0;intRow<6;intRow++){
+                    for(int intCol=0;intCol<7;intCol++){
+                        System.out.print(board[intRow][intCol]);
+                    }
+                    System.out.println("\n");
                 }
-                System.out.println("\n");
+
+                strPlayer = "o";
             }
-            System.out.println(blnWin);
-
-            if(strPlayer.equals("x")){
-				strPlayer = "o";
-			}else{
-				strPlayer = "x";
-			}
-
             if(blnWin == true){
-                System.out.println("win");
+                System.out.println("Host win");
             }
-            theplay.repaint();
         }else if(evt.getSource() == play){
             if(ipField.getText().equals("") && portField.getText().equals("")){
                 System.out.println("Enter a port number and/or IP Address\n");
@@ -243,6 +240,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theframe.repaint();
             }else if(ipField.getText().equals("") && !portField.getText().equals("")){
                 System.out.println("Starting chat in server mode\n");
+                blnHostPlayerTurn=true;
                 theframe.setContentPane(thpanel);
                 theframe.pack();
                 theframe.repaint();
@@ -250,11 +248,12 @@ public class mainGame implements ActionListener, ChangeListener{
                 ssm.connect();			
             }else if(!ipField.getText().equals("") && !portField.getText().equals("")){
                 System.out.println("Starting chat in client mode\n");
+                blnHostPlayerTurn=false;
                 theframe.setContentPane(thpanel);
                 theframe.pack();
                 theframe.repaint();
-                ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()),this);
-                ssm.connect();			
+                ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()),this);	
+                ssm.connect();		
             }else if(!ipField.getText().equals("") && portField.getText().equals("")){
                 System.out.println("Need port number or port/ip\n");
                 theframe.setContentPane(hmpanel);
@@ -265,9 +264,7 @@ public class mainGame implements ActionListener, ChangeListener{
 			theframe.setContentPane(hppanel);
 			theframe.pack();
 		}else if(evt.getSource() == day){
-	
             part = themer("day");
-            System.out.println(part[0]+" "+part[1]+" "+part[2]);
             if(part[0].equals("day")){
                 theplay.imgbg = theplay.imgDbg;
                 theplay.imgboard = theplay.imgDBoard;
@@ -279,19 +276,19 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1].equals("flower")){
+            if(part[1] == "flower"){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1].equals("moon")){
+            }else if(part[1] == "moon"){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1].equals("diamond")){
+            }else if(part[1] == "diamond"){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2].equals("sun")){
+            if(part[2] == "sun"){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2].equals("star")){
+            }else if(part[2] == "star"){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2].equals("sapphire")){
+            }else if(part[2] == "sapphire"){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "day";
@@ -310,19 +307,19 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1].equals("flower")){
+            if(part[1] == "flower"){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1].equals("moon")){
+            }else if(part[1] == "moon"){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1].equals("diamond")){
+            }else if(part[1] == "diamond"){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2].equals("sun")){
+            if(part[2] == "sun"){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2].equals("star")){
+            }else if(part[2] == "star"){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2].equals("sapphire")){
+            }else if(part[2] == "sapphire"){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "night";
@@ -342,19 +339,19 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1].equals("flower")){
+            if(part[1] == "flower"){
                 theplay.imgp1 = theplay.imgFlower;
-            }else if(part[1].equals("moon")){
+            }else if(part[1] == "moon"){
                 theplay.imgp1 = theplay.imgMoon;
-            }else if(part[1].equals("diamond")){
+            }else if(part[1] == "diamond"){
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2].equals("sun")){
+            if(part[2] == "sun"){
                 theplay.imgp2 = theplay.imgSun;
-            }else if(part[2].equals("star")){
+            }else if(part[2] == "star"){
                 theplay.imgp2 = theplay.imgStar;
-            }else if(part[2].equals("sapphire")){
+            }else if(part[2] == "sapphire"){
                 theplay.imgp2 = theplay.imgSap;
             }
 			theplay.theme = "cave";
@@ -393,9 +390,26 @@ public class mainGame implements ActionListener, ChangeListener{
 			theframe.pack();
 		}else if(evt.getSource() == theSend){
             ssm.sendText(theSend.getText());
+            theChat.append("You: "+theSend.getText()+ "\n");
             theSend.setText("");
         }else if(evt.getSource() == ssm){
-           theChat.append(ssm.readText() + "\n");
+            if(gameInfo(ssm.readText()) == true){
+                placeMove(Character.getNumericValue(ssm.readText().charAt(4)), board, strPlayer);
+                blnWin = winCheck(board, strPlayer);
+                System.out.println("PLESEESEEEE");
+                for(int intRow=0;intRow<6;intRow++){
+                    for(int intCol=0;intCol<7;intCol++){
+                        System.out.print(board[intRow][intCol]);
+                    }
+                    System.out.println("\n");
+                }
+                if(blnWin == true){
+                    System.out.println("You lost");
+                }
+                blnHostPlayerTurn=true;
+            }else{
+                theChat.append("Opponent: "+ssm.readText() + "\n");
+            }
         }
     }
     
@@ -416,34 +430,34 @@ public class mainGame implements ActionListener, ChangeListener{
         col4.setSize(170,30);
         col5.setSize(170,30);
         col6.setSize(170,30);
-        play.setSize(300, 80);
+        play.setSize(300, 75);
         day.setSize(320, 320);
-        help.setSize(300, 80);
+        help.setSize(300, 75);
         night.setSize(320, 320);
         cave.setSize(320, 320);
         custom.setSize(320, 320);
-        ipField.setSize(250, 85);
-        portField.setSize(250, 85);
-        theScroll.setSize(360,300);
-        theSend.setSize(360,40);
+        ipField.setSize(170, 100);
+        portField.setSize(170, 100);
+        theScroll.setSize(300,300);
+        theSend.setSize(300,100);
 
-        col0.setLocation(880,100);
-        col1.setLocation(1065,100);
-        col2.setLocation(880,140);
-        col3.setLocation(1065,140);
-        col4.setLocation(880,180);
-        col5.setLocation(1065,180);
-        col6.setLocation(975,220);
-        play.setLocation(360, 350);
-        help.setLocation(360, 440);
+        col0.setLocation(1000,20);
+        col1.setLocation(1000,50);
+        col2.setLocation(1000,80);
+        col3.setLocation(1000,110);
+        col4.setLocation(1000,140);
+        col5.setLocation(1000,170);
+        col6.setLocation(1000,200);
+        play.setLocation(290, 440);
+        help.setLocation(290, 540);
         day.setLocation(300, 10);
         night.setLocation(640, 10);
         cave.setLocation(300, 350);
 		custom.setLocation(640, 350);
-		ipField.setLocation(700, 350);
-        portField.setLocation(700, 435);
-        theScroll.setLocation(880,260);
-        theSend.setLocation(880,560);
+		ipField.setLocation(590, 440);
+        portField.setLocation(590, 540);
+        theScroll.setLocation(0,0);
+        theSend.setLocation(0,310);
 
         col0.addActionListener(this);
         col1.addActionListener(this);
@@ -560,7 +574,6 @@ public class mainGame implements ActionListener, ChangeListener{
 		}
 		return false;
 	} 
-
     public static String [] themer(String theme){
 		
 		int i;
@@ -611,5 +624,16 @@ public class mainGame implements ActionListener, ChangeListener{
 			System.out.println("exception triggered");
 		}
 		return part;
-	}
+	}public static boolean gameInfo(String strText){
+        String strVerify = "";
+        for (int i = 0; i < 4; i++){
+            char c = strText.charAt(i);   
+            strVerify = strVerify+c;
+        }
+        System.out.println(strVerify);
+        if(strVerify.equals("game")){
+            return true;
+        }
+        return false;
+    }
 }
