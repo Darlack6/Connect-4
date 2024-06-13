@@ -49,6 +49,7 @@ public class mainGame implements ActionListener, ChangeListener{
 	
 	JTextField ipField = new JTextField("");
 	JTextField portField = new JTextField("1234");
+    JLabel moveLabel = new JLabel();
 	JLabel iplab = new JLabel("IP Address");
 	JLabel portlab = new JLabel("Port Number");
 
@@ -84,14 +85,8 @@ public class mainGame implements ActionListener, ChangeListener{
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
-
-                for(int intRow=0;intRow<6;intRow++){
-                    for(int intCol=0;intCol<7;intCol++){
-                        System.out.print(board[intRow][intCol]);
-                    }
-                    System.out.println("\n");
-                }
                 strPlayer = "o";
+                moveLabel.setText("Opponent's Move");
             }
             if(blnWin == true){
                 System.out.println("You win");
@@ -109,14 +104,8 @@ public class mainGame implements ActionListener, ChangeListener{
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
-
-                for(int intRow=0;intRow<6;intRow++){
-                    for(int intCol=0;intCol<7;intCol++){
-                        System.out.print(board[intRow][intCol]);
-                    }
-                    System.out.println("\n");
-                }
                 strPlayer = "o";
+                moveLabel.setText("Opponent's Move");
             }
             if(blnWin == true){
                 System.out.println("You win");
@@ -134,15 +123,8 @@ public class mainGame implements ActionListener, ChangeListener{
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
-
-                for(int intRow=0;intRow<6;intRow++){
-                    for(int intCol=0;intCol<7;intCol++){
-                        System.out.print(board[intRow][intCol]);
-                    }
-                    System.out.println("\n");
-                }
-
                 strPlayer = "o";
+                moveLabel.setText("Opponent's Move");
             }
             if(blnWin == true){
                 System.out.println("You win");
@@ -160,15 +142,8 @@ public class mainGame implements ActionListener, ChangeListener{
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
-
-                for(int intRow=0;intRow<6;intRow++){
-                    for(int intCol=0;intCol<7;intCol++){
-                        System.out.print(board[intRow][intCol]);
-                    }
-                    System.out.println("\n");
-                }
-
                 strPlayer = "o";
+                moveLabel.setText("Opponent's Move");
             }
             if(blnWin == true){
                 System.out.println("You win");
@@ -186,15 +161,8 @@ public class mainGame implements ActionListener, ChangeListener{
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
-
-                for(int intRow=0;intRow<6;intRow++){
-                    for(int intCol=0;intCol<7;intCol++){
-                        System.out.print(board[intRow][intCol]);
-                    }
-                    System.out.println("\n");
-                }
-
                 strPlayer = "o";
+                moveLabel.setText("Opponent's Move");
             }
             if(blnWin == true){
                 System.out.println("You win");
@@ -212,15 +180,8 @@ public class mainGame implements ActionListener, ChangeListener{
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
-
-                for(int intRow=0;intRow<6;intRow++){
-                    for(int intCol=0;intCol<7;intCol++){
-                        System.out.print(board[intRow][intCol]);
-                    }
-                    System.out.println("\n");
-                }
-
                 strPlayer = "o";
+                moveLabel.setText("Opponent's Move");
             }
             if(blnWin == true){
                 System.out.println("You win");
@@ -238,15 +199,8 @@ public class mainGame implements ActionListener, ChangeListener{
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
-
-                for(int intRow=0;intRow<6;intRow++){
-                    for(int intCol=0;intCol<7;intCol++){
-                        System.out.print(board[intRow][intCol]);
-                    }
-                    System.out.println("\n");
-                }
-
                 strPlayer = "o";
+                moveLabel.setText("Opponent's Move");
             }
             if(blnWin == true){
                 System.out.println("You win");
@@ -423,12 +377,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theframe.setContentPane(theplay);
                 theframe.pack();
                 theplay.repaint();
-                for(int intRow=0;intRow<6;intRow++){
-                    for(int intCol=0;intCol<7;intCol++){
-                        System.out.print(board[intRow][intCol]);
-                    }
-                    System.out.println("\n");
-                }
+                moveLabel.setText("Your Move");
                 if(blnWin == true){
                     System.out.println("You lost");
                 }
@@ -466,6 +415,7 @@ public class mainGame implements ActionListener, ChangeListener{
         portField.setSize(280, 95);
         theSend.setSize(350, 40);
         theScroll.setSize(350, 300);
+        moveLabel.setSize(300,300);
 
         col0.setLocation(890,120);
         col1.setLocation(1070,120);
@@ -484,6 +434,7 @@ public class mainGame implements ActionListener, ChangeListener{
         portField.setLocation(680, 445);
         theSend.setLocation(890, 600);
         theScroll.setLocation(890, 300);
+        moveLabel.setLocation(700,5);
 
         col0.addActionListener(this);
         col1.addActionListener(this);
@@ -511,6 +462,7 @@ public class mainGame implements ActionListener, ChangeListener{
         theplay.add(col6);
         theplay.add(theScroll);
         theplay.add(theSend);
+        theplay.add(moveLabel);
         hmpanel.add(play);
         hmpanel.add(help);
         thpanel.add(day);
