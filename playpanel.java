@@ -25,10 +25,7 @@ public class playpanel extends JPanel{
     BufferedImage imgp1; 
     BufferedImage imgp2; 
     
-    int intX;
-    int intY;
-    int intRow;
-    int intCol;
+    int intX, intY, intRow, intCol, intCheckerX, intCheckerY;
     boolean blnAnimDone = false;
     
 
@@ -37,13 +34,14 @@ public class playpanel extends JPanel{
         super.paintComponent(g);
         g.drawImage(imgbg,0,0,null);
         g.drawImage(imgboard,100,100,null);
+        g.drawImage(imgp1,intCheckerX,intCheckerY,null);
 
         if(mainGame.board[intRow][intCol] == "x"){
             g.drawImage(imgp1, intX * 100 + 125, intY*10 + 50, null);
         }else if(mainGame.board[intRow][intCol] == "o"){
             g.drawImage(imgp2, intX * 100 + 125, intY*10 + 50, null);
         }
-        
+
         if(blnAnimDone == true){
             for(int intRow = 0; intRow < 6; intRow++){
                 for(int intCol = 0; intCol < 7; intCol++){
