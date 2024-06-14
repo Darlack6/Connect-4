@@ -36,7 +36,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
     JTextField theSend = new JTextField();
     JTextField ipField = new JTextField("");
 	JTextField portField = new JTextField("1234");
-    JScrollPane theScroll = new JScrollPane(theChat);
+    JScrollPane theScroll = new JScrollPane(theChat);   
     JLabel moveLabel = new JLabel("Host's Move");
 	JLabel iplab = new JLabel("IP Address");
 	JLabel portlab = new JLabel("Port Number");
@@ -595,13 +595,13 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         moveLabel.setLocation(350,-150);
         iplab.setLocation(100, 100);
         portlab.setLocation(100, 100);
-        one.setLocation(100, 550);
-        two.setLocation(200, 550);
-        three.setLocation(300, 550);
-        four.setLocation(400, 550);
-        five.setLocation(500, 550);
-        six.setLocation(600, 550);
-        seven.setLocation(700, 550);
+        one.setLocation(150, 525);
+        two.setLocation(250, 525);
+        three.setLocation(350, 525);
+        four.setLocation(450, 525);
+        five.setLocation(550, 525);
+        six.setLocation(650, 525);
+        seven.setLocation(750, 525);
 
         col0.addActionListener(this);
         col1.addActionListener(this);
@@ -699,12 +699,10 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
 
     
     public static String [] themer(String theme){
-		
 		int i;
 		int a;
 		String [][] array = new String [4][3];
 		String [] part = new String [3];
-		
 		try{
 			BufferedReader themescsv = new BufferedReader(new FileReader("themes.csv"));
 			
