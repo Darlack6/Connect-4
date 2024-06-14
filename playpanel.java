@@ -7,8 +7,8 @@ import java.awt.image.*;
 public class playpanel extends JPanel{
     /**properties*/
 	String theme = "day";
-    int intCheckerX = 0;
-    int intCheckerY = 0;
+    int intCheckerX = 34;
+    int intCheckerY = 54;
     BufferedImage imgCBoard;
     BufferedImage imgDBoard;
     BufferedImage imgNBoard; 
