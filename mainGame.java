@@ -16,6 +16,8 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         /*General Program Properties*/
     int intUserCol;
     int intUserRow;
+    int intX;
+    int intY;
     public static String[][] board = loadBoard();
     String part [] = new String [3]; 
     String strPlayer = "o";
@@ -36,7 +38,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
     JTextField theSend = new JTextField();
     JTextField ipField = new JTextField("");
 	JTextField portField = new JTextField("1234");
-    JScrollPane theScroll = new JScrollPane(theChat);   
+    JScrollPane theScroll = new JScrollPane(theChat);
     JLabel moveLabel = new JLabel("Host's Move");
 	JLabel iplab = new JLabel("IP Address");
 	JLabel portlab = new JLabel("Port Number");
@@ -49,13 +51,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
 	JLabel seven = new JLabel("7");
 	
         /*buttons*/
-    JButton col0 = new JButton("Column 1");
-    JButton col1 = new JButton("Column 2");
-    JButton col2 = new JButton("Column 3");
-    JButton col3 = new JButton("Column 4");
-    JButton col4 = new JButton("Column 5");
-    JButton col5 = new JButton("Column 6");
-    JButton col6 = new JButton("Column 7");
+    JButton drop = new JButton("DROP");
 	JButton play = new JButton("Play");
 	JButton help = new JButton("Help");
 	JButton day = new JButton("Day Mode");
@@ -72,220 +68,222 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
     Font fntAerialSmall = new Font("Arial",Font.PLAIN,10);
     /*Methods*/
     public void actionPerformed(ActionEvent evt){
-        /*If user clicks column 0*/
-        if(evt.getSource() == col0){
-            /*Only plays if its client side turn*/
-            if(blnHostPlayerTurn==true){
-                //set variables for drawing
-                theplay.intX=0;
-                theplay.intY=-10;
-                strPlayer = "x";
-                intUserCol = 0;
-                theplay.intCol = intUserCol;
-                theplay.intRow = theConnect.row(intUserCol, board);
-                //places checker
-                board = theConnect.placeMove(intUserCol, board, strPlayer);
-                //animate checker
-                theTimer.start();
-                //win check
-                blnWin = theConnect.winCheck(board, strPlayer);
-                //send column to other user and switches checker to other user
-                ssm.sendText("game0");
-                blnHostPlayerTurn=false;
-                strPlayer = "o";
-                intCounter++;
-                //updates frame
-                moveLabel.setText("Opponent's Move");
-                theframe.setContentPane(theplay);
-                theframe.pack();
-                theplay.repaint();
-            }
-            if(blnWin == true){ //win
-                System.out.println("You win");
-            }else if(intCounter == 21){ //draw
-                System.out.println("Draw");
-            }
-        /*If user clicks column 1*/
-        }else if(evt.getSource() == col1){
-            /*Only plays if its client side turn*/
-            if(blnHostPlayerTurn==true){
-                //set variables for drawing
-                theplay.intX=1;
-                theplay.intY=-10;
-                strPlayer = "x";
-                intUserCol = 1;
-                theplay.intCol = intUserCol;
-                theplay.intRow = theConnect.row(intUserCol, board);
-                //places checker
-                board = theConnect.placeMove(intUserCol, board, strPlayer);
-                //animate checker
-                theTimer.start();
-                //win check
-                blnWin = theConnect.winCheck(board, strPlayer);
-                //send column to other user and switches checker to other user
-                ssm.sendText("game1");
-                blnHostPlayerTurn=false;
-                strPlayer = "o";
-                intCounter++;
-                //updates frame
-                moveLabel.setText("Opponent's Move");
-                theframe.setContentPane(theplay);
-                theframe.pack();
-                theplay.repaint();
-            }
-            if(blnWin == true){ //win 
-                System.out.println("You win");
-            }else if(intCounter == 21){ //draw
-                System.out.println("Draw");
-            }
-        /*If user clicks column 2*/
-        }else if(evt.getSource() == col2){
-            /*Only plays if its client side turn*/
-            if(blnHostPlayerTurn==true){
-                //set variables for drawing
-                theplay.intX=2;
-                theplay.intY=-10;
-                strPlayer = "x";
-                intUserCol = 2;
-                theplay.intCol = intUserCol;
-                theplay.intRow = theConnect.row(intUserCol, board);
-                //places checker
-                board = theConnect.placeMove(intUserCol, board, strPlayer);
-                //animate checker
-                theTimer.start();
-                //win check
-                blnWin = theConnect.winCheck(board, strPlayer);
-                //send column to other user and switches checker to other user
-                ssm.sendText("game2");
-                blnHostPlayerTurn=false;
-                strPlayer = "o";
-                intCounter++;
-                //updates frame
-                moveLabel.setText("Opponent's Move");
-                theframe.setContentPane(theplay);
-                theframe.pack();
-                theplay.repaint();
-            }
-            if(blnWin == true){ //win 
-                System.out.println("You win");
-            }else if(intCounter == 21){ //draw
-                System.out.println("Draw");
-            }
-        /*If user clicks column 3*/
-        }else if(evt.getSource() == col3){
-            /*Only plays if its client side turn*/
-            if(blnHostPlayerTurn==true){
-                //set variables for drawing
-                theplay.intX=3;
-                theplay.intY=-10;
-                strPlayer = "x";
-                intUserCol = 3;
-                theplay.intCol = intUserCol;
-                theplay.intRow = theConnect.row(intUserCol, board);
-                //places checker
-                board = theConnect.placeMove(intUserCol, board, strPlayer);
-                //animate checker
-                theTimer.start();
-                //win check
-                blnWin = theConnect.winCheck(board, strPlayer);
-                //send column to other user and switches checker to other user
-                ssm.sendText("game3");
-                blnHostPlayerTurn=false;
-                strPlayer = "o";
-                intCounter++;
-                //updates frame
-                moveLabel.setText("Opponent's Move");
-                theframe.setContentPane(theplay);
-                theframe.pack();
-                theplay.repaint();
-            }
-            if(blnWin == true){ // win 
-                System.out.println("You win");
-            }else if(intCounter == 21){ //draw
-                System.out.println("Draw");
-            }
-        /*If user clicks column 4*/
-        }else if(evt.getSource() == col4){
-            if(blnHostPlayerTurn==true){
-                theplay.intX=4;
-                theplay.intY=-10;
-                strPlayer = "x";
-                intUserCol = 4;
-                theplay.intCol = intUserCol;
-                theplay.intRow = theConnect.row(intUserCol, board);
-
-                theTimer.start();
-                
-                board = theConnect.placeMove(intUserCol, board, strPlayer);
-                blnWin = theConnect.winCheck(board, strPlayer);
-                ssm.sendText("game4");
-                blnHostPlayerTurn=false;
-                intCounter++;
-                System.out.println(intCounter);
-                strPlayer = "o";
-                moveLabel.setText("Opponent's Move");
-                theframe.setContentPane(theplay);
-                theframe.pack();
-                theplay.repaint();
-            }
-            if(blnWin == true){
-                System.out.println("You win");
-            }else if(intCounter == 42){
-                System.out.println("Draw");
-            }
-        }else if(evt.getSource() == col5){
-            if(blnHostPlayerTurn==true){
-                theplay.intX=5;
-                theplay.intY=-10;
-                strPlayer = "x";
-                intUserCol = 5;
-                theplay.intCol = intUserCol;
-                theplay.intRow = theConnect.row(intUserCol, board);
-                
-                board = theConnect.placeMove(intUserCol, board, strPlayer);
-                theTimer.start();
-                blnWin = theConnect.winCheck(board, strPlayer);
-                ssm.sendText("game5");
-                blnHostPlayerTurn=false;
-                intCounter++;
-                System.out.println(intCounter);
-                strPlayer = "o";
-                moveLabel.setText("Opponent's Move");
-                theframe.setContentPane(theplay);
-                theframe.pack();
-                theplay.repaint();
-            }
-            if(blnWin == true){
-                System.out.println("You win");
-            }else if(intCounter == 42){
-                System.out.println("Draw");
-            }
-        }else if(evt.getSource() == col6){
-            if(blnHostPlayerTurn==true){
-                theplay.intX=6;
-                theplay.intY=-10;
-                strPlayer = "x";
-                intUserCol = 6;
-                theplay.intCol = intUserCol;
-                theplay.intRow = theConnect.row(intUserCol, board);
-                
-                board = theConnect.placeMove(intUserCol, board, strPlayer);
-                theTimer.start();
-                blnWin = theConnect.winCheck(board, strPlayer);
-                ssm.sendText("game6");
-                blnHostPlayerTurn=false;
-                intCounter++;
-                System.out.println(intCounter);
-                strPlayer = "o";
-                moveLabel.setText("Opponent's Move");
-                theframe.setContentPane(theplay);
-                theframe.pack();
-                theplay.repaint();
-            }
-            if(blnWin == true){
-                System.out.println("You win");
-            }else if(intCounter == 42){
-                System.out.println("Draw");
+        if(evt.getSource() == drop){
+            if(blnfocus == false){
+                if(intX > 70 && intX < 185){
+                    if(blnHostPlayerTurn==true){
+                        //set variables for drawing
+                        theplay.intX=0;
+                        theplay.intY=-10;
+                        strPlayer = "x";
+                        intUserCol = 0;
+                        theplay.intCol = intUserCol;
+                        theplay.intRow = theConnect.row(intUserCol, board);
+                        //places checker
+                        board = theConnect.placeMove(intUserCol, board, strPlayer);
+                        //animate checker
+                        theTimer.start();
+                        //win check
+                        blnWin = theConnect.winCheck(board, strPlayer);
+                        //send column to other user and switches checker to other user
+                        ssm.sendText("game0");
+                        blnHostPlayerTurn=false;
+                        strPlayer = "o";
+                        intCounter++;
+                        //updates frame
+                        theplay.intCheckerX = 0;
+                        theplay.intCheckerY = 0;
+                        moveLabel.setText("Opponent's Move");
+                        theframe.setContentPane(theplay);
+                        theframe.pack();
+                        theplay.repaint();
+                    }
+                    if(blnWin == true){ //win
+                        System.out.println("You win");
+                    }else if(intCounter == 21){ //draw
+                        System.out.println("Draw");
+                    }
+                }else if(intX > 185 && intX < 285){
+                    /*Only plays if its client side turn*/
+                    if(blnHostPlayerTurn==true){
+                        //set variables for drawing
+                        theplay.intX=1;
+                        theplay.intY=-10;
+                        strPlayer = "x";
+                        intUserCol = 1;
+                        theplay.intCol = intUserCol;
+                        theplay.intRow = theConnect.row(intUserCol, board);
+                        //places checker
+                        board = theConnect.placeMove(intUserCol, board, strPlayer);
+                        //animate checker
+                        theTimer.start();
+                        //win check
+                        blnWin = theConnect.winCheck(board, strPlayer);
+                        //send column to other user and switches checker to other user
+                        ssm.sendText("game1");
+                        blnHostPlayerTurn=false;
+                        strPlayer = "o";
+                        intCounter++;
+                        //updates frame
+                        moveLabel.setText("Opponent's Move");
+                        theframe.setContentPane(theplay);
+                        theframe.pack();
+                        theplay.repaint();
+                    }
+                    if(blnWin == true){ //win 
+                        System.out.println("You win");
+                    }else if(intCounter == 21){ //draw
+                        System.out.println("Draw");
+                    }
+                }else if(intX > 285 && intX < 385){
+                    /*Only plays if its client side turn*/
+                    if(blnHostPlayerTurn==true){
+                        //set variables for drawing
+                        theplay.intX=2;
+                        theplay.intY=-10;
+                        strPlayer = "x";
+                        intUserCol = 2;
+                        theplay.intCol = intUserCol;
+                        theplay.intRow = theConnect.row(intUserCol, board);
+                        //places checker
+                        board = theConnect.placeMove(intUserCol, board, strPlayer);
+                        //animate checker
+                        theTimer.start();
+                        //win check
+                        blnWin = theConnect.winCheck(board, strPlayer);
+                        //send column to other user and switches checker to other user
+                        ssm.sendText("game2");
+                        blnHostPlayerTurn=false;
+                        strPlayer = "o";
+                        intCounter++;
+                        //updates frame
+                        moveLabel.setText("Opponent's Move");
+                        theframe.setContentPane(theplay);
+                        theframe.pack();
+                        theplay.repaint();
+                    }
+                    if(blnWin == true){ //win 
+                        System.out.println("You win");
+                    }else if(intCounter == 21){ //draw
+                        System.out.println("Draw");
+                    }
+                /*If user clicks column 3*/
+                }else if(intX> 385 && intX < 485){
+                    /*Only plays if its client side turn*/
+                    if(blnHostPlayerTurn==true){
+                        //set variables for drawing
+                        theplay.intX=3;
+                        theplay.intY=-10;
+                        strPlayer = "x";
+                        intUserCol = 3;
+                        theplay.intCol = intUserCol;
+                        theplay.intRow = theConnect.row(intUserCol, board);
+                        //places checker
+                        board = theConnect.placeMove(intUserCol, board, strPlayer);
+                        //animate checker
+                        theTimer.start();
+                        //win check
+                        blnWin = theConnect.winCheck(board, strPlayer);
+                        //send column to other user and switches checker to other user
+                        ssm.sendText("game3");
+                        blnHostPlayerTurn=false;
+                        strPlayer = "o";
+                        intCounter++;
+                        //updates frame
+                        moveLabel.setText("Opponent's Move");
+                        theframe.setContentPane(theplay);
+                        theframe.pack();
+                        theplay.repaint();
+                    }
+                    if(blnWin == true){ // win 
+                        System.out.println("You win");
+                    }else if(intCounter == 21){ //draw
+                        System.out.println("Draw");
+                    }
+                /*If user clicks column 4*/
+                }else if(intX > 485 && intX < 585){
+                    if(blnHostPlayerTurn==true){
+                        theplay.intX=4;
+                        theplay.intY=-10;
+                        strPlayer = "x";
+                        intUserCol = 4;
+                        theplay.intCol = intUserCol;
+                        theplay.intRow = theConnect.row(intUserCol, board);
+        
+                        theTimer.start();
+                        
+                        board = theConnect.placeMove(intUserCol, board, strPlayer);
+                        blnWin = theConnect.winCheck(board, strPlayer);
+                        ssm.sendText("game4");
+                        blnHostPlayerTurn=false;
+                        intCounter++;
+                        System.out.println(intCounter);
+                        strPlayer = "o";
+                        moveLabel.setText("Opponent's Move");
+                        theframe.setContentPane(theplay);
+                        theframe.pack();
+                        theplay.repaint();
+                    }
+                    if(blnWin == true){
+                        System.out.println("You win");
+                    }else if(intCounter == 42){
+                        System.out.println("Draw");
+                    }
+                }else if(intX > 585 && intX < 685){
+                    if(blnHostPlayerTurn==true){
+                        theplay.intX=5;
+                        theplay.intY=-10;
+                        strPlayer = "x";
+                        intUserCol = 5;
+                        theplay.intCol = intUserCol;
+                        theplay.intRow = theConnect.row(intUserCol, board);
+                        
+                        board = theConnect.placeMove(intUserCol, board, strPlayer);
+                        theTimer.start();
+                        blnWin = theConnect.winCheck(board, strPlayer);
+                        ssm.sendText("game5");
+                        blnHostPlayerTurn=false;
+                        intCounter++;
+                        System.out.println(intCounter);
+                        strPlayer = "o";
+                        moveLabel.setText("Opponent's Move");
+                        theframe.setContentPane(theplay);
+                        theframe.pack();
+                        theplay.repaint();
+                    }
+                    if(blnWin == true){
+                        System.out.println("You win");
+                    }else if(intCounter == 42){
+                        System.out.println("Draw");
+                    }
+                }else if(intX > 685 && intX < 785){
+                    if(blnHostPlayerTurn==true){
+                        theplay.intX=6;
+                        theplay.intY=-10;
+                        strPlayer = "x";
+                        intUserCol = 6;
+                        theplay.intCol = intUserCol;
+                        theplay.intRow = theConnect.row(intUserCol, board);
+                        
+                        board = theConnect.placeMove(intUserCol, board, strPlayer);
+                        theTimer.start();
+                        blnWin = theConnect.winCheck(board, strPlayer);
+                        ssm.sendText("game6");
+                        blnHostPlayerTurn=false;
+                        intCounter++;
+                        System.out.println(intCounter);
+                        strPlayer = "o";
+                        moveLabel.setText("Opponent's Move");
+                        theframe.setContentPane(theplay);
+                        theframe.pack();
+                        theplay.repaint();
+                    }
+                    if(blnWin == true){
+                        System.out.println("You win");
+                    }else if(intCounter == 42){
+                        System.out.println("Draw");
+                    }
+                }
             }
         }else if(evt.getSource() == theTimer){
             theplay.intY++;
@@ -496,42 +494,9 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
             if(blnfocus == true){
                 theplay.intCheckerX = evt.getX();
                 theplay.intCheckerY = evt.getY();
+                intX = evt.getX() - 35;
+                intY = evt.getY() - 54;
                 theplay.repaint();
-            }else{
-                if(evt.getX() > 100 && evt.getX() < 215){
-                    if(blnHostPlayerTurn==true){
-                        //set variables for drawing
-                        theplay.intX=0;
-                        theplay.intY=-10;
-                        strPlayer = "x";
-                        intUserCol = 0;
-                        theplay.intCol = intUserCol;
-                        theplay.intRow = theConnect.row(intUserCol, board);
-                        //places checker
-                        board = theConnect.placeMove(intUserCol, board, strPlayer);
-                        //animate checker
-                        theTimer.start();
-                        //win check
-                        blnWin = theConnect.winCheck(board, strPlayer);
-                        //send column to other user and switches checker to other user
-                        ssm.sendText("game0");
-                        blnHostPlayerTurn=false;
-                        strPlayer = "o";
-                        intCounter++;
-                        //updates frame
-                        theplay.intCheckerX = 0;
-                        theplay.intCheckerY = 0;
-                        moveLabel.setText("Opponent's Move");
-                        theframe.setContentPane(theplay);
-                        theframe.pack();
-                        theplay.repaint();
-                    }
-                    if(blnWin == true){ //win
-                        System.out.println("You win");
-                    }else if(intCounter == 21){ //draw
-                        System.out.println("Draw");
-                    }
-                }
             }
         }
     }
@@ -547,13 +512,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         hppanel.setLayout(null);
         theplay.setLayout(null);
         
-        col0.setSize(170,30);
-        col1.setSize(170,30);
-        col2.setSize(170,30);
-        col3.setSize(170,30);
-        col4.setSize(170,30);
-        col5.setSize(170,30);
-        col6.setSize(170,30);
+        drop.setSize(360,50);
         play.setSize(300, 90);
         day.setSize(320, 320);
         help.setSize(300, 90);
@@ -575,13 +534,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         six.setSize(200, 200);
         seven.setSize(200, 200);
 
-        col0.setLocation(890,120);
-        col1.setLocation(1070,120);
-        col2.setLocation(890,160);
-        col3.setLocation(1070,160);
-        col4.setLocation(890,200);
-        col5.setLocation(1070,200);
-        col6.setLocation(990,240);
+        drop.setLocation(890,120);
         play.setLocation(360, 350);
         help.setLocation(360, 450);
         day.setLocation(300, 10);
@@ -603,13 +556,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         six.setLocation(650, 525);
         seven.setLocation(750, 525);
 
-        col0.addActionListener(this);
-        col1.addActionListener(this);
-        col2.addActionListener(this);
-        col3.addActionListener(this);
-        col4.addActionListener(this);
-        col5.addActionListener(this);
-        col6.addActionListener(this);
+        drop.addActionListener(this);
         play.addActionListener(this);
         help.addActionListener(this);
         day.addActionListener(this);
@@ -621,21 +568,8 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         theframe.addMouseMotionListener(this);
 
         /**fonts*/
-            col0.setForeground(Color.BLACK);
-            col1.setForeground(Color.BLACK);
-            col2.setForeground(Color.BLACK);
-            col3.setForeground(Color.BLACK);
-            col4.setForeground(Color.BLACK);
-            col5.setForeground(Color.BLACK);
-            col6.setForeground(Color.BLACK);
-
-            col0.setBackground(Color.WHITE);
-            col1.setBackground(Color.WHITE);
-            col2.setBackground(Color.WHITE);
-            col3.setBackground(Color.WHITE);
-            col4.setBackground(Color.WHITE);
-            col5.setBackground(Color.WHITE);
-            col6.setBackground(Color.WHITE);
+            drop.setForeground(Color.BLACK);
+            drop.setBackground(Color.WHITE);
             
             one.setForeground(Color.WHITE);
             two.setForeground(Color.WHITE);
@@ -648,13 +582,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
             moveLabel.setForeground(Color.WHITE);
             moveLabel.setFont(fntAerialLarge);
 
-        theplay.add(col0);
-        theplay.add(col1);
-        theplay.add(col2);
-        theplay.add(col3);
-        theplay.add(col4);
-        theplay.add(col5);
-        theplay.add(col6);
+        theplay.add(drop);
         theplay.add(theScroll);
         theplay.add(theSend);
         theplay.add(moveLabel);
@@ -673,7 +601,6 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         theplay.add(five);
         theplay.add(six);
         theplay.add(seven);
-        
         
 		play.setHorizontalAlignment(JButton.CENTER);
 		help.setHorizontalAlignment(JButton.CENTER);
@@ -699,10 +626,12 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
 
     
     public static String [] themer(String theme){
+		
 		int i;
 		int a;
 		String [][] array = new String [4][3];
 		String [] part = new String [3];
+		
 		try{
 			BufferedReader themescsv = new BufferedReader(new FileReader("themes.csv"));
 			

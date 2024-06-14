@@ -36,7 +36,6 @@ public class playpanel extends JPanel{
         super.paintComponent(g);
         g.drawImage(imgbg,0,0,null);
         g.drawImage(imgboard,100,100,null);
-<<<<<<< Updated upstream
         g.drawImage(imgp1,intCheckerX-35,intCheckerY-54,null);
 
         for(int intRow = 0; intRow < 6; intRow++){
@@ -48,10 +47,6 @@ public class playpanel extends JPanel{
                 }
             }
         }
-=======
-        g.drawImage(imgp1,intCheckerX,intCheckerY,null);
-        
->>>>>>> Stashed changes
 
         if(mainGame.board[intRow][intCol] == "x"){
             g.drawImage(imgp1, intX * 100 + 125, intY*10 + 50, null);
