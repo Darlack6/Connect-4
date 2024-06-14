@@ -41,7 +41,6 @@ public class playpanel extends JPanel{
         if(mainGame.board[intRow][intCol] == "x"){
             g.drawImage(imgp1, intX * 100 + 125, intY*10 + 50, null);
         }else if(mainGame.board[intRow][intCol] == "o"){
-            System.out.println("DWIKMDWKDM");
             g.drawImage(imgp2, intX * 100 + 125, intY*10 + 50, null);
         }
         if(blnAnimDone == true){

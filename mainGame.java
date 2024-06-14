@@ -300,7 +300,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
             }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
@@ -310,8 +310,7 @@ public class mainGame implements ActionListener, ChangeListener{
 			theplay.theme = "day";
 			theframe.setContentPane(theplay);
 			theframe.pack();
-			
-			theplay.repaint();
+			theframe.repaint();
 		}else if(evt.getSource() == night){
             part = themer("night");
             if(part[0].equals("day")){
@@ -343,7 +342,7 @@ public class mainGame implements ActionListener, ChangeListener{
 			theplay.theme = "night";
 			theframe.setContentPane(theplay);
 			theframe.pack();
-			theplay.repaint();
+			theframe.repaint();
 		}else if(evt.getSource() == cave){
             part = themer("cave");
             if(part[0].equals("day")){
@@ -365,7 +364,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
             }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
@@ -374,7 +373,8 @@ public class mainGame implements ActionListener, ChangeListener{
             }
 			theplay.theme = "cave";
 			theframe.setContentPane(theplay);
-			theframe.pack();
+            theframe.pack();
+			theframe.repaint();
 		}else if(evt.getSource() == custom){
             part = themer("custom");
             if(part[0].equals("day")){
@@ -388,7 +388,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgboard = theplay.imgCBoard;
             }
             
-            if(part[1] == "flower"){
+            if(part[1].equals("flower")){
                 theplay.imgp1 = theplay.imgFlower;
             }else if(part[1].equals("moon")){
                 theplay.imgp1 = theplay.imgMoon;
@@ -396,7 +396,7 @@ public class mainGame implements ActionListener, ChangeListener{
                 theplay.imgp1 = theplay.imgDiamond;
             }
             
-            if(part[2] == "sun"){
+            if(part[2].equals("sun")){
                 theplay.imgp2 = theplay.imgSun;
             }else if(part[2].equals("star")){
                 theplay.imgp2 = theplay.imgStar;
@@ -406,6 +406,7 @@ public class mainGame implements ActionListener, ChangeListener{
 			theplay.theme = "custom";
 			theframe.setContentPane(theplay);
 			theframe.pack();
+            theframe.repaint();
 		}else if(evt.getSource() == theSend){
             ssm.sendText(theSend.getText());
             theChat.append("You: "+theSend.getText()+ "\n");
