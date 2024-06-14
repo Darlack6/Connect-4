@@ -56,7 +56,7 @@ public class mainGame implements ActionListener, ChangeListener{
 
     SuperSocketMaster ssm;
 
-    Timer theTimer = new Timer(1000/48, this);
+    Timer theTimer = new Timer(1000/60, this);
  
     //Methods
     public void actionPerformed(ActionEvent evt){
