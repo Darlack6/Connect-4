@@ -23,6 +23,7 @@ public class mainGame implements ActionListener, ChangeListener{
     JTextField theSend = new JTextField();
     JScrollPane theScroll = new JScrollPane(theChat);
     int intUserCol;
+    int intUserRow;
     public static String[][] board = new String[6][7];
     String part [] = new String [3]; 
 
@@ -54,53 +55,75 @@ public class mainGame implements ActionListener, ChangeListener{
 	JLabel portlab = new JLabel("Port Number");
 
     SuperSocketMaster ssm;
+
+    Timer theTimer = new Timer(1000/48, this);
  
     //Methods
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == col0){
             if(blnHostPlayerTurn==true){
+                theplay.intX=0;
+                theplay.intY=-10;
                 strPlayer = "x";
                 intUserCol = 0;
+                theplay.intCol = intUserCol;
+                theplay.intRow = row(intUserCol, board);
                 
                 board = placeMove(intUserCol, board, strPlayer);
+                theTimer.start();
                 blnWin = winCheck(board, strPlayer);
                 ssm.sendText("game0");
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
                 strPlayer = "o";
+
                 moveLabel.setText("Opponent's Move");
+                theframe.setContentPane(theplay);
+                theframe.pack();
+                theplay.repaint();
             }
             if(blnWin == true){
                 System.out.println("You win");
             }
-            theframe.setContentPane(theplay);
-            theframe.pack();
-            theplay.repaint();
         }else if(evt.getSource() == col1){
             if(blnHostPlayerTurn==true){
+                theplay.intX=1;
+                theplay.intY=-10;
                 strPlayer = "x";
                 intUserCol = 1;
+                theplay.intCol = intUserCol;
+                theplay.intRow = row(intUserCol, board);
+                
                 board = placeMove(intUserCol, board, strPlayer);
+                theTimer.start();
                 blnWin = winCheck(board, strPlayer);
                 ssm.sendText("game1");
                 blnHostPlayerTurn=false;
                 intCounter++;
                 System.out.println(intCounter);
+
                 strPlayer = "o";
+                theTimer.start();
                 moveLabel.setText("Opponent's Move");
+                theframe.setContentPane(theplay);
+                theframe.pack();
+                theplay.repaint();
             }
             if(blnWin == true){
                 System.out.println("You win");
             }
-            theframe.setContentPane(theplay);
-            theframe.pack();
-            theplay.repaint();
         }else if(evt.getSource() == col2){
             if(blnHostPlayerTurn==true){
+                theplay.intX=2;
+                theplay.intY=-10;
                 strPlayer = "x";
                 intUserCol = 2;
+                theplay.intCol = intUserCol;
+                theplay.intRow = row(intUserCol, board);
+                
                 board = placeMove(intUserCol, board, strPlayer);
+                theTimer.start();
                 blnWin = winCheck(board, strPlayer);
                 ssm.sendText("game2");
                 blnHostPlayerTurn=false;
@@ -108,18 +131,24 @@ public class mainGame implements ActionListener, ChangeListener{
                 System.out.println(intCounter);
                 strPlayer = "o";
                 moveLabel.setText("Opponent's Move");
+                theframe.setContentPane(theplay);
+                theframe.pack();
+                theplay.repaint();
             }
             if(blnWin == true){
                 System.out.println("You win");
             }
-            theframe.setContentPane(theplay);
-            theframe.pack();
-            theplay.repaint();
         }else if(evt.getSource() == col3){
             if(blnHostPlayerTurn==true){
+                theplay.intX=3;
+                theplay.intY=-10;
                 strPlayer = "x";
                 intUserCol = 3;
+                theplay.intCol = intUserCol;
+                theplay.intRow = row(intUserCol, board);
+                
                 board = placeMove(intUserCol, board, strPlayer);
+                theTimer.start();
                 blnWin = winCheck(board, strPlayer);
                 ssm.sendText("game3");
                 blnHostPlayerTurn=false;
@@ -127,17 +156,24 @@ public class mainGame implements ActionListener, ChangeListener{
                 System.out.println(intCounter);
                 strPlayer = "o";
                 moveLabel.setText("Opponent's Move");
+                theframe.setContentPane(theplay);
+                theframe.pack();
+                theplay.repaint();
             }
             if(blnWin == true){
                 System.out.println("You win");
             }
-            theframe.setContentPane(theplay);
-            theframe.pack();
-            theplay.repaint();
         }else if(evt.getSource() == col4){
             if(blnHostPlayerTurn==true){
+                theplay.intX=4;
+                theplay.intY=-10;
                 strPlayer = "x";
                 intUserCol = 4;
+                theplay.intCol = intUserCol;
+                theplay.intRow = row(intUserCol, board);
+
+                theTimer.start();
+                
                 board = placeMove(intUserCol, board, strPlayer);
                 blnWin = winCheck(board, strPlayer);
                 ssm.sendText("game4");
@@ -146,18 +182,24 @@ public class mainGame implements ActionListener, ChangeListener{
                 System.out.println(intCounter);
                 strPlayer = "o";
                 moveLabel.setText("Opponent's Move");
+                theframe.setContentPane(theplay);
+                theframe.pack();
+                theplay.repaint();
             }
             if(blnWin == true){
                 System.out.println("You win");
             }
-            theframe.setContentPane(theplay);
-            theframe.pack();
-            theplay.repaint();
         }else if(evt.getSource() == col5){
             if(blnHostPlayerTurn==true){
+                theplay.intX=5;
+                theplay.intY=-10;
                 strPlayer = "x";
                 intUserCol = 5;
+                theplay.intCol = intUserCol;
+                theplay.intRow = row(intUserCol, board);
+                
                 board = placeMove(intUserCol, board, strPlayer);
+                theTimer.start();
                 blnWin = winCheck(board, strPlayer);
                 ssm.sendText("game5");
                 blnHostPlayerTurn=false;
@@ -165,18 +207,24 @@ public class mainGame implements ActionListener, ChangeListener{
                 System.out.println(intCounter);
                 strPlayer = "o";
                 moveLabel.setText("Opponent's Move");
+                theframe.setContentPane(theplay);
+                theframe.pack();
+                theplay.repaint();
             }
             if(blnWin == true){
                 System.out.println("You win");
             }
-            theframe.setContentPane(theplay);
-            theframe.pack();
-            theplay.repaint();
         }else if(evt.getSource() == col6){
             if(blnHostPlayerTurn==true){
+                theplay.intX=6;
+                theplay.intY=-10;
                 strPlayer = "x";
                 intUserCol = 6;
+                theplay.intCol = intUserCol;
+                theplay.intRow = row(intUserCol, board);
+                
                 board = placeMove(intUserCol, board, strPlayer);
+                theTimer.start();
                 blnWin = winCheck(board, strPlayer);
                 ssm.sendText("game6");
                 blnHostPlayerTurn=false;
@@ -184,13 +232,22 @@ public class mainGame implements ActionListener, ChangeListener{
                 System.out.println(intCounter);
                 strPlayer = "o";
                 moveLabel.setText("Opponent's Move");
+                theframe.setContentPane(theplay);
+                theframe.pack();
+                theplay.repaint();
             }
             if(blnWin == true){
                 System.out.println("You win");
             }
-            theframe.setContentPane(theplay);
-            theframe.pack();
-            theplay.repaint();
+        }else if(evt.getSource() == theTimer){
+            theplay.intY++;
+            theframe.repaint();
+            if(theplay.intY > maxY(board,intUserCol)){
+                theTimer.stop();
+                theplay.blnAnimDone = true;
+                theplay.intY=-30;
+            }
+        
         }else if(evt.getSource() == play){
             if(ipField.getText().equals("") && portField.getText().equals("")){
                 System.out.println("Enter a port number and/or IP Address\n");
@@ -355,8 +412,15 @@ public class mainGame implements ActionListener, ChangeListener{
             theSend.setText("");
         }else if(evt.getSource() == ssm){
             if(gameInfo(ssm.readText()) == true){
-                placeMove(Character.getNumericValue(ssm.readText().charAt(4)), board, strPlayer);
+                theplay.intCol = intUserCol;
+                theplay.intRow = row(intUserCol, board);
+                theplay.intX=ssm.readText().charAt(4);
+                theplay.intY=maxY(board, intUserCol);
+                
+                board=placeMove(Character.getNumericValue(ssm.readText().charAt(4)), board, strPlayer);
+                theTimer.start();
                 blnWin = winCheck(board, strPlayer);
+
                 theframe.setContentPane(theplay);
                 theframe.pack();
                 theplay.repaint();
@@ -488,6 +552,15 @@ public class mainGame implements ActionListener, ChangeListener{
 
         return board;
 	}
+    public static Integer row(int intUserCol, String[][] board){
+		for (int intRow = 5; intRow >= 0; intRow--){
+			if(board[intRow][intUserCol] == "0"){
+				return intRow;
+            }
+        }
+        return 0;
+	}
+
 
 	public static String[][] loadBoard(){
         String strBoard[][] = new String[6][7];
@@ -600,5 +673,12 @@ public class mainGame implements ActionListener, ChangeListener{
         }catch(StringIndexOutOfBoundsException e){
             return false;
         }
+    }public static int maxY(String[][] board, int intUserCol){
+    for (int intRow = 5; intRow >= 0; intRow--){
+        if(board[intRow][intUserCol] == "0"){
+            return 46+(intRow-4)*8;
+        }
     }
+    return 0;
+}
 }
