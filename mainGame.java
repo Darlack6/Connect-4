@@ -14,6 +14,8 @@ import javax.swing.event.*;
 public class mainGame implements ActionListener, ChangeListener{
     //Properties
     JFrame theframe = new JFrame("Connect-4");
+    connect4 theConnect = new connect4();
+
     playpanel theplay = new playpanel();
     homepanel hmpanel = new homepanel();
 	helppanel hppanel = new helppanel();
@@ -24,7 +26,7 @@ public class mainGame implements ActionListener, ChangeListener{
     JScrollPane theScroll = new JScrollPane(theChat);
     int intUserCol;
     int intUserRow;
-    public static String[][] board = new String[6][7];
+    public static String[][] board = loadBoard();
     String part [] = new String [3]; 
 
     String strPlayer = "o";
@@ -67,11 +69,11 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 0;
                 theplay.intCol = intUserCol;
-                theplay.intRow = row(intUserCol, board);
+                theplay.intRow = theConnect.row(intUserCol, board);
                 
-                board = placeMove(intUserCol, board, strPlayer);
+                board = theConnect.placeMove(intUserCol, board, strPlayer);
                 theTimer.start();
-                blnWin = winCheck(board, strPlayer);
+                blnWin = theConnect.winCheck(board, strPlayer);
                 ssm.sendText("game0");
                 blnHostPlayerTurn=false;
                 intCounter++;
@@ -93,11 +95,11 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 1;
                 theplay.intCol = intUserCol;
-                theplay.intRow = row(intUserCol, board);
+                theplay.intRow = theConnect.row(intUserCol, board);
                 
-                board = placeMove(intUserCol, board, strPlayer);
+                board = theConnect.placeMove(intUserCol, board, strPlayer);
                 theTimer.start();
-                blnWin = winCheck(board, strPlayer);
+                blnWin = theConnect.winCheck(board, strPlayer);
                 ssm.sendText("game1");
                 blnHostPlayerTurn=false;
                 intCounter++;
@@ -120,11 +122,11 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 2;
                 theplay.intCol = intUserCol;
-                theplay.intRow = row(intUserCol, board);
+                theplay.intRow = theConnect.row(intUserCol, board);
                 
-                board = placeMove(intUserCol, board, strPlayer);
+                board = theConnect.placeMove(intUserCol, board, strPlayer);
                 theTimer.start();
-                blnWin = winCheck(board, strPlayer);
+                blnWin = theConnect.winCheck(board, strPlayer);
                 ssm.sendText("game2");
                 blnHostPlayerTurn=false;
                 intCounter++;
@@ -145,11 +147,11 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 3;
                 theplay.intCol = intUserCol;
-                theplay.intRow = row(intUserCol, board);
+                theplay.intRow = theConnect.row(intUserCol, board);
                 
-                board = placeMove(intUserCol, board, strPlayer);
+                board = theConnect.placeMove(intUserCol, board, strPlayer);
                 theTimer.start();
-                blnWin = winCheck(board, strPlayer);
+                blnWin = theConnect.winCheck(board, strPlayer);
                 ssm.sendText("game3");
                 blnHostPlayerTurn=false;
                 intCounter++;
@@ -170,12 +172,12 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 4;
                 theplay.intCol = intUserCol;
-                theplay.intRow = row(intUserCol, board);
+                theplay.intRow = theConnect.row(intUserCol, board);
 
                 theTimer.start();
                 
-                board = placeMove(intUserCol, board, strPlayer);
-                blnWin = winCheck(board, strPlayer);
+                board = theConnect.placeMove(intUserCol, board, strPlayer);
+                blnWin = theConnect.winCheck(board, strPlayer);
                 ssm.sendText("game4");
                 blnHostPlayerTurn=false;
                 intCounter++;
@@ -196,11 +198,11 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 5;
                 theplay.intCol = intUserCol;
-                theplay.intRow = row(intUserCol, board);
+                theplay.intRow = theConnect.row(intUserCol, board);
                 
-                board = placeMove(intUserCol, board, strPlayer);
+                board = theConnect.placeMove(intUserCol, board, strPlayer);
                 theTimer.start();
-                blnWin = winCheck(board, strPlayer);
+                blnWin = theConnect.winCheck(board, strPlayer);
                 ssm.sendText("game5");
                 blnHostPlayerTurn=false;
                 intCounter++;
@@ -221,11 +223,11 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 6;
                 theplay.intCol = intUserCol;
-                theplay.intRow = row(intUserCol, board);
+                theplay.intRow = theConnect.row(intUserCol, board);
                 
-                board = placeMove(intUserCol, board, strPlayer);
+                board = theConnect.placeMove(intUserCol, board, strPlayer);
                 theTimer.start();
-                blnWin = winCheck(board, strPlayer);
+                blnWin = theConnect.winCheck(board, strPlayer);
                 ssm.sendText("game6");
                 blnHostPlayerTurn=false;
                 intCounter++;
@@ -242,7 +244,7 @@ public class mainGame implements ActionListener, ChangeListener{
         }else if(evt.getSource() == theTimer){
             theplay.intY++;
             theframe.repaint();
-            if(theplay.intY > maxY(board,intUserCol)){
+            if(theplay.intY > theConnect.maxY(board,intUserCol)){
                 theTimer.stop();
                 theplay.blnAnimDone = true;
                 theplay.intY=-30;
@@ -412,15 +414,15 @@ public class mainGame implements ActionListener, ChangeListener{
             theChat.append("You: "+theSend.getText()+ "\n");
             theSend.setText("");
         }else if(evt.getSource() == ssm){
-            if(gameInfo(ssm.readText()) == true){
+            if(theConnect.gameInfo(ssm.readText()) == true){
                 theplay.intCol = intUserCol;
-                theplay.intRow = row(intUserCol, board);
-                theplay.intX=ssm.readText().charAt(4);
-                theplay.intY=maxY(board, intUserCol);
+                theplay.intRow = theConnect.row(intUserCol, board);
+                theplay.intX= ssm.readText().charAt(4);
+                theplay.intY= theConnect.maxY(board, intUserCol);
                 
-                board=placeMove(Character.getNumericValue(ssm.readText().charAt(4)), board, strPlayer);
+                board=theConnect.placeMove(Character.getNumericValue(ssm.readText().charAt(4)), board, strPlayer);
                 theTimer.start();
-                blnWin = winCheck(board, strPlayer);
+                blnWin = theConnect.winCheck(board, strPlayer);
 
                 theframe.setContentPane(theplay);
                 theframe.pack();
@@ -539,76 +541,10 @@ public class mainGame implements ActionListener, ChangeListener{
 
     //main
     public static void main(String args[]){
-        board = loadBoard();
         new mainGame();
     }
 
-    public static String[][] placeMove(int intUserCol, String[][] board, String strPlayer){
-		for (int intRow = 5; intRow >= 0; intRow--){
-			if(board[intRow][intUserCol] == "0"){
-				board[intRow][intUserCol] = strPlayer;
-				break;
-			}
-		}
-
-        return board;
-	}
-    public static Integer row(int intUserCol, String[][] board){
-		for (int intRow = 5; intRow >= 0; intRow--){
-			if(board[intRow][intUserCol] == "0"){
-				return intRow;
-            }
-        }
-        return 0;
-	}
-
-
-	public static String[][] loadBoard(){
-        String strBoard[][] = new String[6][7];
-        for(int intRow=0;intRow<6;intRow++){
-            for(int intCol=0;intCol<7;intCol++){
-                 strBoard[intRow][intCol]="0";
-            }
-        }
-        return strBoard;
-    }
     
-	//square variable tells us what color the player is (e.g. are they x or o)
-	public static boolean winCheck(String [][] board, String square){
-		//Horizontal win
-		for(int intRow=0;intRow<6;intRow++){
-			for(int intCol=0;intCol<4;intCol++){
-				if(board[intRow][intCol] == square && board[intRow][intCol+1] == square && board[intRow][intCol+2] == square && board[intRow][intCol+3] == square){
-					return true;
-				}
-			}
-		}
-		//Vertical win
-		for(int intRow=0;intRow<3;intRow++){
-			for(int intCol=0;intCol<7;intCol++){
-				if(board[intRow][intCol] == square && board[intRow+1][intCol] == square && board[intRow+2][intCol] == square && board[intRow+3][intCol] == square){
-					return true;
-				}
-			}
-		}
-		//Diagonal Upwards (to the right) Win
-		for(int intRow=3;intRow<6;intRow++){
-			for(int intCol=0;intCol<4;intCol++){
-				if(board[intRow][intCol] == square && board[intRow-1][intCol+1] == square && board[intRow-2][intCol+2] == square && board[intRow-3][intCol+3] == square){
-					return true;
-				}
-			}
-		}
-		//Diagonal Downwards (to the left) Win
-		for(int intRow=0;intRow<3;intRow++){
-			for(int intCol=0;intCol<4;intCol++){
-				if(board[intRow][intCol] == square && board[intRow+1][intCol+1] == square && board[intRow+2][intCol+2] == square && board[intRow+3][intCol+3] == square){
-					return true;
-				}
-			}
-		}
-		return false;
-	} 
     public static String [] themer(String theme){
 		
 		int i;
@@ -659,27 +595,14 @@ public class mainGame implements ActionListener, ChangeListener{
 			System.out.println("exception triggered");
 		}
 		return part;
-	}public static boolean gameInfo(String strText){
-        String strVerify = "";
-        try{
-            for (int i = 0; i < 4; i++){
-                char c = strText.charAt(i);   
-                strVerify = strVerify+c;
-            }
-            System.out.println(strVerify);
-            if(strVerify.equals("game")){
-                return true;
-            }
-            return false;
-        }catch(StringIndexOutOfBoundsException e){
-            return false;
-        }
-    }public static int maxY(String[][] board, int intUserCol){
-    for (int intRow = 5; intRow >= 0; intRow--){
-        if(board[intRow][intUserCol] == "0"){
-            return 46+(intRow-4)*8;
-        }
     }
-    return 0;
-}
+    public static String[][] loadBoard(){
+        String strBoard[][] = new String[6][7];
+        for(int intRow=0;intRow<6;intRow++){
+            for(int intCol=0;intCol<7;intCol++){
+                 strBoard[intRow][intCol]="0";
+            }
+        }
+        return strBoard;
+    }
 }
