@@ -46,7 +46,7 @@ public class playpanel extends JPanel{
             for(int intRow = 0; intRow < 6; intRow++){
                 for(int intCol = 0; intCol < 7; intCol++){
                     if(mainGame.board[intRow][intCol] == "x"){
-                        g.drawImage(imgp1, intCol*100 + 125, (5-intRow)*-80+520, null);
+                        g.drawImage(imgp1, intCol*101 + 125, (5-intRow)*-80+520, null);
                     }else if(mainGame.board[intRow][intCol] == "o"){
                         g.drawImage(imgp2, intCol*101 + 125, (5-intRow)*-80+520, null);
                     }
