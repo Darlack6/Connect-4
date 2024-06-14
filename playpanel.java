@@ -37,11 +37,6 @@ public class playpanel extends JPanel{
         super.paintComponent(g);
         g.drawImage(imgbg,0,0,null);
         g.drawImage(imgboard,100,100,null);
-		
-		if(intfall > 0 && intfall < 10){
-			g.drawImage(imgp1, intC*100 + 125, intfall*10 + 50, null);
-			System.out.println("drawn");
-		}
         
         for(intRow = 0; intRow < 6; intRow++){
 			for(intCol = 0; intCol < 7; intCol++){

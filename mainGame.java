@@ -62,23 +62,6 @@ public class mainGame implements ActionListener, ChangeListener{
                 strPlayer = "x";
                 intUserCol = 0;
                 
-                //animation attempt
-                /*theplay.intC = 0;
-				theplay.intfall = 0;
-            
-				for(int i = 0; i < 10; i++){
-					theplay.intfall += 1;
-					System.out.println(theplay.intfall);
-					theplay.repaint();
-					try{
-						Thread.sleep(100);
-					}catch(InterruptedException e){
-						System.out.println("exception");
-					}
-				}
-			
-				theplay.intfall = 10;*/
-                
                 board = placeMove(intUserCol, board, strPlayer);
                 blnWin = winCheck(board, strPlayer);
                 ssm.sendText("game0");
