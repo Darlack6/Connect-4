@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.event.*;
 
-public class mainGame implements ActionListener, ChangeListener{
+public class mainGame implements ActionListener, ChangeListener, MouseMotionListener{
     /*Properties*/
         /*General Program Properties*/
     int intUserCol;
@@ -21,6 +21,8 @@ public class mainGame implements ActionListener, ChangeListener{
     String strPlayer = "o";
     Boolean blnHostPlayerTurn;
     Boolean blnWin = false;
+    Boolean blnfocus;
+    double dblTimer; 
     int intCounter;
         /*objects*/
     connect4 theConnect = new connect4();
@@ -64,6 +66,7 @@ public class mainGame implements ActionListener, ChangeListener{
     SuperSocketMaster ssm;
         /* Timer */
     Timer theTimer = new Timer(1000/60, this);
+    Timer theTimer2 = new Timer(1000/60, this);
         /* Font */
     Font fntAerialLarge = new Font("Arial",Font.PLAIN,40);
     Font fntAerialSmall = new Font("Arial",Font.PLAIN,10);
@@ -482,9 +485,63 @@ public class mainGame implements ActionListener, ChangeListener{
     
     public void stateChanged(ChangeEvent evt){
 	}
+
+    public void mouseDragged(MouseEvent evt){
+        if(evt.getX() > theplay.intCheckerX && evt.getX() < theplay.intCheckerX + 60 && evt.getY() > theplay.intCheckerY && evt.getY() < theplay.intCheckerY + 60){
+            blnfocus = true;
+            theplay.intCheckerX = evt.getX();
+            theplay.intCheckerY = evt.getY();
+            theplay.repaint();
+        }else{
+            if(blnfocus == true){
+                theplay.intCheckerX = evt.getX();
+                theplay.intCheckerY = evt.getY();
+                theplay.repaint();
+            }else{
+                if(evt.getX() > 100 && evt.getX() < 215){
+                    if(blnHostPlayerTurn==true){
+                        //set variables for drawing
+                        theplay.intX=0;
+                        theplay.intY=-10;
+                        strPlayer = "x";
+                        intUserCol = 0;
+                        theplay.intCol = intUserCol;
+                        theplay.intRow = theConnect.row(intUserCol, board);
+                        //places checker
+                        board = theConnect.placeMove(intUserCol, board, strPlayer);
+                        //animate checker
+                        theTimer.start();
+                        //win check
+                        blnWin = theConnect.winCheck(board, strPlayer);
+                        //send column to other user and switches checker to other user
+                        ssm.sendText("game0");
+                        blnHostPlayerTurn=false;
+                        strPlayer = "o";
+                        intCounter++;
+                        //updates frame
+                        theplay.intCheckerX = 0;
+                        theplay.intCheckerY = 0;
+                        moveLabel.setText("Opponent's Move");
+                        theframe.setContentPane(theplay);
+                        theframe.pack();
+                        theplay.repaint();
+                    }
+                    if(blnWin == true){ //win
+                        System.out.println("You win");
+                    }else if(intCounter == 21){ //draw
+                        System.out.println("Draw");
+                    }
+                }
+            }
+        }
+    }
+    public void mouseMoved(MouseEvent evt){
+        blnfocus=false;
+    }
     
     /*Constructor*/
     public mainGame(){
+        theTimer2.start();
         hmpanel.setLayout(null);
         thpanel.setLayout(null);
         hppanel.setLayout(null);
@@ -561,6 +618,7 @@ public class mainGame implements ActionListener, ChangeListener{
         custom.addActionListener(this);
         theSend.addActionListener(this);
         theChat.setEnabled(false);
+        theframe.addMouseMotionListener(this);
 
         /**fonts*/
             col0.setForeground(Color.BLACK);

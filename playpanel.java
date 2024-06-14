@@ -7,6 +7,8 @@ import java.awt.image.*;
 public class playpanel extends JPanel{
     /**properties*/
 	String theme = "day";
+    int intCheckerX = 0;
+    int intCheckerY = 0;
     BufferedImage imgCBoard;
     BufferedImage imgDBoard;
     BufferedImage imgNBoard; 
@@ -25,7 +27,7 @@ public class playpanel extends JPanel{
     BufferedImage imgp1; 
     BufferedImage imgp2; 
     
-    int intX, intY, intRow, intCol, intCheckerX, intCheckerY;
+    int intX, intY, intRow, intCol;
     boolean blnAnimDone = false;
     
 
@@ -34,7 +36,17 @@ public class playpanel extends JPanel{
         super.paintComponent(g);
         g.drawImage(imgbg,0,0,null);
         g.drawImage(imgboard,100,100,null);
-        g.drawImage(imgp1,intCheckerX,intCheckerY,null);
+        g.drawImage(imgp1,intCheckerX-35,intCheckerY-54,null);
+
+        for(int intRow = 0; intRow < 6; intRow++){
+            for(int intCol = 0; intCol < 7; intCol++){
+                if(mainGame.board[intRow][intCol] == "x"){
+                    g.drawImage(imgp1, intCol*101 + 125, (5-intRow)*-80+520, null);
+                }else if(mainGame.board[intRow][intCol] == "o"){
+                    g.drawImage(imgp2, intCol*101 + 125, (5-intRow)*-80+520, null);
+                }
+            }
+        }
 
         if(mainGame.board[intRow][intCol] == "x"){
             g.drawImage(imgp1, intX * 100 + 125, intY*10 + 50, null);
