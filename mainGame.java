@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.event.*;
 
-public class mainGame implements ActionListener, ChangeListener, MouseMotionListener{
+public class mainGame implements ActionListener, ChangeListener, MouseMotionListener, MouseListener{
     /*Properties*/
         /*General Program Properties*/
     int intUserCol;
@@ -58,6 +58,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
 	JButton night = new JButton("Night Mode");
 	JButton cave = new JButton("Cave Mode");
 	JButton custom = new JButton("Custom");
+	JButton back = new JButton("Back");
         /* SSM */
     SuperSocketMaster ssm;
         /* Timer */
@@ -324,6 +325,9 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
 		}else if(evt.getSource() == help){
 			theframe.setContentPane(hppanel);
 			theframe.pack();
+		}else if(evt.getSource() == back){
+			theframe.setContentPane(hmpanel);
+			theframe.pack();
 		}else if(evt.getSource() == day){
             part = themer("day");
             if(part[0].equals("day")){
@@ -504,6 +508,23 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         blnfocus=false;
     }
     
+    public void mouseEntered(MouseEvent evt){
+    }
+    
+    public void mouseExited(MouseEvent evt){
+    }
+    
+    public void mousePressed(MouseEvent evt){
+    }
+    
+    public void mouseClicked(MouseEvent evt){
+    }
+    
+    public void mouseReleased(MouseEvent evt){
+		theplay.intCheckerX = 0;
+		theplay.intCheckerY = 0;
+    }
+    
     /*Constructor*/
     public mainGame(){
         theTimer2.start();
@@ -533,6 +554,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         five.setSize(200, 200);
         six.setSize(200, 200);
         seven.setSize(200, 200);
+        back.setSize(100, 40);
 
         drop.setLocation(890,120);
         play.setLocation(360, 350);
@@ -555,6 +577,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         five.setLocation(550, 525);
         six.setLocation(650, 525);
         seven.setLocation(750, 525);
+        back.setLocation(20, 0);
 
         drop.addActionListener(this);
         play.addActionListener(this);
@@ -564,12 +587,17 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         cave.addActionListener(this);
         custom.addActionListener(this);
         theSend.addActionListener(this);
+        back.addActionListener(this);
         theChat.setEnabled(false);
         theframe.addMouseMotionListener(this);
+        theframe.addMouseListener(this);
 
         /**fonts*/
             drop.setForeground(Color.BLACK);
             drop.setBackground(Color.WHITE);
+            
+            back.setForeground(Color.BLACK);
+            back.setBackground(Color.WHITE);
             
             one.setForeground(Color.WHITE);
             two.setForeground(Color.WHITE);
@@ -601,6 +629,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         theplay.add(five);
         theplay.add(six);
         theplay.add(seven);
+        hppanel.add(back);
         
 		play.setHorizontalAlignment(JButton.CENTER);
 		help.setHorizontalAlignment(JButton.CENTER);

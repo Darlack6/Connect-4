@@ -13,13 +13,13 @@ public class helppanel extends JPanel{
 	/**Set up panel graphics*/
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(imghome, 0, 0, null);
+		g.drawImage(imghome, 20, 0, null);
 	}
 
 	/**Constructor*/
 	public helppanel(){
 		try{
-			imghome = ImageIO.read(new File("pixellake.JPG"));
+			imghome = ImageIO.read(new File("HELP.png"));
 		}catch(IOException e){
 			System.out.println("Cannot load image");
 		}

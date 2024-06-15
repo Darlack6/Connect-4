@@ -36,6 +36,7 @@ public class playpanel extends JPanel{
         super.paintComponent(g);
         g.drawImage(imgbg,0,0,null);
         g.drawImage(imgboard,100,100,null);
+        g.drawImage(imgp1,0,0,null);
         g.drawImage(imgp1,intCheckerX-35,intCheckerY-54,null);
 
         for(int intRow = 0; intRow < 6; intRow++){
