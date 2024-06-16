@@ -1,6 +1,6 @@
 /** Program Name: Connect 4
  * Created by: Adeline Lue Sang & Derek Lien
- * Version number: 0.2*/
+ * Version number: 1.0*/
 
 import java.awt.*;
 import javax.swing.*;
@@ -36,8 +36,8 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
     JFrame theframe = new JFrame("Connect-4");
     JTextArea theChat = new JTextArea();
     JTextField theSend = new JTextField();
-    JTextField ipField = new JTextField("");
-	JTextField portField = new JTextField("");
+    JTextField ipField = new JTextField("ip address");
+	JTextField portField = new JTextField("port");
     JScrollPane theScroll = new JScrollPane(theChat);
     JLabel moveLabel = new JLabel("Host's Move");
 	JLabel iplab = new JLabel("IP Address");
@@ -282,13 +282,16 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
             }
             /**show win screen if win*/
             if(blnWin == true){
-                theEnd.blnWin = true; 
+                theEnd.strWin = "win"; 
                 theframe.setContentPane(theEnd);
                 theframe.pack();
                 theframe.repaint();
 			/**print draw if tie*/
-            }else if(intCounter == 21){
-                System.out.println("Draw");
+            }else if(intCounter == 42){
+                theEnd.strWin = "draw"; 
+                theframe.setContentPane(theEnd);
+                theframe.pack();
+                theframe.repaint();
             }
         /**timer triggers animation*/
         }else if(evt.getSource() == theTimer){
@@ -493,16 +496,22 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                 board=theConnect.placeMove(Character.getNumericValue(ssm.readText().charAt(4)), board, strPlayer);
                 theTimer.start();
                 blnWin = theConnect.winCheck(board, strPlayer);
+                intCounter++;
 
                 theframe.setContentPane(theplay);
                 theframe.pack();
                 theplay.repaint();
                 moveLabel.setText("Your Move");
                 if(blnWin == true){
-                    theEnd.blnWin = false; 
+                    theEnd.strWin = "lose"; 
                     theframe.setContentPane(theEnd);
                     theframe.pack();
                     theEnd.repaint();
+                }else if(intCounter == 42){
+                    theEnd.strWin = "draw"; 
+                    theframe.setContentPane(theEnd);
+                    theframe.pack();
+                    theframe.repaint();
                 }
                 blnHostPlayerTurn=true;
             }else{

@@ -6,15 +6,17 @@ import java.awt.image.*;
 
 public class endpanel extends JPanel{
     /**properties*/
-    BufferedImage imgWin, imgLose;
-    boolean blnWin;
+    BufferedImage imgWin, imgLose, imgDraw;
+    String strWin;
     /** Methods */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        if(blnWin == true){
+        if(strWin.equals("win")){
             g.drawImage(imgWin,0,0,null);
-        }else{
+        }else if(strWin.equals("lose")){
             g.drawImage(imgLose,0,0,null);
+        }else{
+            g.drawImage(imgDraw,0,0,null);
         }
     }
 
@@ -45,5 +47,6 @@ public class endpanel extends JPanel{
         super();
         imgWin = loadImage("win.png");
         imgLose = loadImage("lose.png");
+        imgDraw = loadImage("draw.png");
     }
 }
