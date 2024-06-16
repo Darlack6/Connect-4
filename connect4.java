@@ -3,13 +3,15 @@ public class connect4 {
 
     //methods
     public String[][] placeMove(int intUserCol, String[][] board, String strPlayer){
+		if(board[0][intUserCol] != "0"){
+			System.out.println("FULL COLUMN");
+		}
 		for (int intRow = 5; intRow >= 0; intRow--){
 			if(board[intRow][intUserCol] == "0"){
 				board[intRow][intUserCol] = strPlayer;
 				break;
 			}
 		}
-
         return board;
 	}
     public Integer row(int intUserCol, String[][] board){
