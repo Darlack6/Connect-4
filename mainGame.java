@@ -37,7 +37,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
     JTextArea theChat = new JTextArea();
     JTextField theSend = new JTextField();
     JTextField ipField = new JTextField("");
-	JTextField portField = new JTextField("1234");
+	JTextField portField = new JTextField("");
     JScrollPane theScroll = new JScrollPane(theChat);
     JLabel moveLabel = new JLabel("Host's Move");
 	JLabel iplab = new JLabel("IP Address");
@@ -273,7 +273,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                         theframe.pack();
                         theplay.repaint();
                     }
-                /**if drop without chooseing column, leave panel as is*/
+                /**if drop without choosing column, leave panel as is*/
                 }else{
                     theframe.setContentPane(theplay);
                     theframe.pack();
@@ -312,7 +312,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                 theframe.repaint();
             /**start program as server if only port number is entered*/
             }else if(ipField.getText().equals("") && !portField.getText().equals("")){
-                System.out.println("Starting chat in server mode\n");
+                System.out.println("Starting game in server mode\n");
                 blnHostPlayerTurn=true;
                 theframe.setContentPane(thpanel);
                 theframe.pack();
@@ -321,7 +321,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                 ssm.connect();	
             /**start program as client if IP address and port number are entered*/		
             }else if(!ipField.getText().equals("") && !portField.getText().equals("")){
-                System.out.println("Starting chat in client mode\n");
+                System.out.println("Starting game in client mode\n");
                 blnHostPlayerTurn=false;
                 theframe.setContentPane(thpanel);
                 theframe.pack();

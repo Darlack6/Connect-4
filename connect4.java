@@ -1,7 +1,9 @@
 public class connect4 {
-    //properties
+    /**properties*/
 
-    //methods
+    /**methods*/
+
+	/** place move method, takes user inputed column and fills the lowest row that is not filled */
     public String[][] placeMove(int intUserCol, String[][] board, String strPlayer){
 		if(board[0][intUserCol] != "0"){
 			System.out.println("FULL COLUMN");
@@ -14,6 +16,7 @@ public class connect4 {
 		}
         return board;
 	}
+	/** returns which row checker is placed */
     public Integer row(int intUserCol, String[][] board){
 		for (int intRow = 5; intRow >= 0; intRow--){
 			if(board[intRow][intUserCol] == "0"){
@@ -23,9 +26,9 @@ public class connect4 {
         return 0;
 	}
     
-	//square variable tells us what color the player is (e.g. are they x or o)
+	/** Win check, checks for 4 in a row horizontally, vertically and diagonally */
 	public boolean winCheck(String [][] board, String square){
-		//Horizontal win
+		/**Horizontal win*/
 		for(int intRow=0;intRow<6;intRow++){
 			for(int intCol=0;intCol<4;intCol++){
 				if(board[intRow][intCol] == square && board[intRow][intCol+1] == square && board[intRow][intCol+2] == square && board[intRow][intCol+3] == square){
@@ -33,7 +36,7 @@ public class connect4 {
 				}
 			}
 		}
-		//Vertical win
+		/**Vertical win*/
 		for(int intRow=0;intRow<3;intRow++){
 			for(int intCol=0;intCol<7;intCol++){
 				if(board[intRow][intCol] == square && board[intRow+1][intCol] == square && board[intRow+2][intCol] == square && board[intRow+3][intCol] == square){
@@ -41,7 +44,7 @@ public class connect4 {
 				}
 			}
 		}
-		//Diagonal Upwards (to the right) Win
+		/**Diagonal Upwards (to the right) Win*/
 		for(int intRow=3;intRow<6;intRow++){
 			for(int intCol=0;intCol<4;intCol++){
 				if(board[intRow][intCol] == square && board[intRow-1][intCol+1] == square && board[intRow-2][intCol+2] == square && board[intRow-3][intCol+3] == square){
@@ -59,6 +62,7 @@ public class connect4 {
 		}
 		return false;
 	}
+	/** Returns a game move message or chat message */
     public boolean gameInfo(String strText){
         String strVerify = "";
         try{
@@ -74,16 +78,18 @@ public class connect4 {
         }catch(StringIndexOutOfBoundsException e){
             return false;
         }
-    }public int maxY(String[][] board, int intUserCol){
-    for (int intRow = 5; intRow >= 0; intRow--){
-        if(board[intRow][intUserCol] == "0"){
-            return 46+(intRow-4)*8;
-        }
     }
+	/** Returns the max Y coordinate the checker can fall */
+	public int maxY(String[][] board, int intUserCol){
+		for (int intRow = 5; intRow >= 0; intRow--){
+			if(board[intRow][intUserCol] == "0"){
+				return 46+(intRow-4)*8;
+			}
+		}
     return 0;
     }
 
-    //Constructor
+    /** Constructor */
     public connect4(){
     }  
 }

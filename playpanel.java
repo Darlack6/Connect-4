@@ -38,7 +38,7 @@ public class playpanel extends JPanel{
         g.drawImage(imgboard,100,100,null);
         g.drawImage(imgp1,0,0,null);
         g.drawImage(imgp1,intCheckerX-35,intCheckerY-54,null);
-
+        /** Draws existing checkers */
         for(int intRow = 0; intRow < 6; intRow++){
             for(int intCol = 0; intCol < 7; intCol++){
                 if(mainGame.board[intRow][intCol] == "x"){
@@ -48,12 +48,13 @@ public class playpanel extends JPanel{
                 }
             }
         }
-
+        /** Draws falling checker */
         if(mainGame.board[intRow][intCol] == "x"){
             g.drawImage(imgp1, intX * 100 + 125, intY*10 + 50, null);
         }else if(mainGame.board[intRow][intCol] == "o"){
             g.drawImage(imgp2, intX * 100 + 125, intY*10 + 50, null);
         }
+        /** Draws all checkers once fall animation is done */
 
         if(blnAnimDone == true){
             for(int intRow = 0; intRow < 6; intRow++){
@@ -69,28 +70,46 @@ public class playpanel extends JPanel{
         }
     }
     
+    /**gets image from jar file, if not found, uses from local file*/
+    public BufferedImage loadImage(String strFileName){
+        InputStream imageclass = null;
+        imageclass = this.getClass().getResourceAsStream(strFileName);
+        if(imageclass == null){
+        }else{
+            try{
+                return ImageIO.read(imageclass);
+            }catch(IOException e){
+                System.out.println("Unable to load file");
+            }
+        }
+        try{
+            System.out.println("loading from file");
+            BufferedImage theimage = ImageIO.read(new File(strFileName));
+            return theimage;
+        }catch(IOException e){
+            System.out.println("Unable to load local image file: \""+strFileName+"\"");
+            return null;
+        }
+    }
+    
     /**constructor*/
     public playpanel(){
         super();
         
-        try{
-			imgCBoard = ImageIO.read(new File("caveboard.png"));
-			imgDBoard = ImageIO.read(new File("dayboard.png"));
-			imgNBoard = ImageIO.read(new File("nightboard.png"));
-			
-			imgCbg = ImageIO.read(new File("cavebg.png"));
-			imgDbg = ImageIO.read(new File("daybg.png"));
-			imgNbg = ImageIO.read(new File("nightbg.png"));
-			
-			imgFlower = ImageIO.read(new File("flower.png"));
-			imgSun = ImageIO.read(new File("sun.png"));
-			imgDiamond = ImageIO.read(new File("diamond.png"));
-			imgSap = ImageIO.read(new File("sapphire.png"));
-			imgMoon = ImageIO.read(new File("moon.png"));
-			imgStar = ImageIO.read(new File("star.png"));
-		
-		}catch(IOException e){
-        }
+        imgCBoard = loadImage("caveboard.png");
+        imgDBoard = loadImage("dayboard.png");
+        imgNBoard = loadImage("nightboard.png");
+        
+        imgCbg = loadImage("cavebg.png");
+        imgDbg = loadImage("daybg.png");
+        imgNbg = loadImage("nightbg.png");
+        
+        imgFlower = loadImage("flower.png");
+        imgSun = loadImage("sun.png");
+        imgDiamond = loadImage("diamond.png");
+        imgSap = loadImage("sapphire.png");
+        imgMoon = loadImage("moon.png");
+        imgStar = loadImage("star.png");
 		
     }
 }

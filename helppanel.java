@@ -16,12 +16,30 @@ public class helppanel extends JPanel{
 		g.drawImage(imghome, 20, 0, null);
 	}
 
+	/**gets image from jar file, if not found, uses from local file*/
+    public BufferedImage loadImage(String strFileName){
+        InputStream imageclass = null;
+        imageclass = this.getClass().getResourceAsStream(strFileName);
+        if(imageclass == null){
+        }else{
+            try{
+                return ImageIO.read(imageclass);
+            }catch(IOException e){
+                System.out.println("Unable to load file");
+            }
+        }
+        try{
+            System.out.println("loading from file");
+            BufferedImage theimage = ImageIO.read(new File(strFileName));
+            return theimage;
+        }catch(IOException e){
+            System.out.println("Unable to load local image file: \""+strFileName+"\"");
+            return null;
+        }
+    }
+
 	/**Constructor*/
 	public helppanel(){
-		try{
-			imghome = ImageIO.read(new File("HELP.png"));
-		}catch(IOException e){
-			System.out.println("Cannot load image");
-		}
+		imghome = loadImage("HELP.png");
 	}
 }

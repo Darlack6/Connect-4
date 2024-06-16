@@ -5,9 +5,10 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 public class endpanel extends JPanel{
-    //propertiesjavac
+    /**properties*/
     BufferedImage imgWin, imgLose;
     boolean blnWin;
+    /** Methods */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         if(blnWin == true){
@@ -16,13 +17,33 @@ public class endpanel extends JPanel{
             g.drawImage(imgLose,0,0,null);
         }
     }
+
+    /**gets image from jar file, if not found, uses from local file*/
+    public BufferedImage loadImage(String strFileName){
+        InputStream imageclass = null;
+        imageclass = this.getClass().getResourceAsStream(strFileName);
+        if(imageclass == null){
+        }else{
+            try{
+                return ImageIO.read(imageclass);
+            }catch(IOException e){
+                System.out.println("Unable to load file");
+            }
+        }
+        try{
+            System.out.println("loading from file");
+            BufferedImage theimage = ImageIO.read(new File(strFileName));
+            return theimage;
+        }catch(IOException e){
+            System.out.println("Unable to load local image file: \""+strFileName+"\"");
+            return null;
+        }
+    }
+
+    /* Constructor */
     public endpanel(){
         super();
-        try{
-            imgWin = ImageIO.read(new File("win.png"));
-            imgLose = ImageIO.read(new File("lose.png"));
-        }catch(IOException e){
-
-        }
+        imgWin = loadImage("win.png");
+        imgLose = loadImage("lose.png");
     }
 }
