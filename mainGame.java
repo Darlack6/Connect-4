@@ -1,4 +1,4 @@
-/**Program Name: Connect 4
+/** Program Name: Connect 4
  * Created by: Adeline Lue Sang & Derek Lien
  * Version number: 0.2*/
 
