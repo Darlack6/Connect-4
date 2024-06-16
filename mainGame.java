@@ -32,6 +32,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
     homepanel hmpanel = new homepanel();
 	helppanel hppanel = new helppanel();
 	themepanel thpanel = new themepanel();
+    endpanel theEnd = new endpanel();
         /* Frames, Text Areas, Fields, Scroll panes and Labels */
     JFrame theframe = new JFrame("Connect-4");
     JTextArea theChat = new JTextArea();
@@ -59,6 +60,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
 	JButton cave = new JButton("Cave Mode");
 	JButton custom = new JButton("Custom");
 	JButton back = new JButton("Back");
+    JButton quit = new JButton("Quit");
         /* SSM */
     SuperSocketMaster ssm;
         /* Timer */
@@ -99,11 +101,6 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                         theframe.pack();
                         theplay.repaint();
                     }
-                    if(blnWin == true){ //win
-                        System.out.println("You win");
-                    }else if(intCounter == 21){ //draw
-                        System.out.println("Draw");
-                    }
                 }else if(intX > 185 && intX < 285){
                     /*Only plays if its client side turn*/
                     if(blnHostPlayerTurn==true){
@@ -131,11 +128,6 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                         theframe.pack();
                         theplay.repaint();
                     }
-                    if(blnWin == true){ //win 
-                        System.out.println("You win");
-                    }else if(intCounter == 21){ //draw
-                        System.out.println("Draw");
-                    }
                 }else if(intX > 285 && intX < 385){
                     /*Only plays if its client side turn*/
                     if(blnHostPlayerTurn==true){
@@ -162,11 +154,6 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                         theframe.setContentPane(theplay);
                         theframe.pack();
                         theplay.repaint();
-                    }
-                    if(blnWin == true){ //win 
-                        System.out.println("You win");
-                    }else if(intCounter == 21){ //draw
-                        System.out.println("Draw");
                     }
                 /*If user clicks column 3*/
                 }else if(intX> 385 && intX < 485){
@@ -196,11 +183,6 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                         theframe.pack();
                         theplay.repaint();
                     }
-                    if(blnWin == true){ // win 
-                        System.out.println("You win");
-                    }else if(intCounter == 21){ //draw
-                        System.out.println("Draw");
-                    }
                 /*If user clicks column 4*/
                 }else if(intX > 485 && intX < 585){
                     if(blnHostPlayerTurn==true){
@@ -225,11 +207,6 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                         theframe.pack();
                         theplay.repaint();
                     }
-                    if(blnWin == true){
-                        System.out.println("You win");
-                    }else if(intCounter == 42){
-                        System.out.println("Draw");
-                    }
                 }else if(intX > 585 && intX < 685){
                     if(blnHostPlayerTurn==true){
                         theplay.intX=5;
@@ -251,11 +228,6 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                         theframe.setContentPane(theplay);
                         theframe.pack();
                         theplay.repaint();
-                    }
-                    if(blnWin == true){
-                        System.out.println("You win");
-                    }else if(intCounter == 42){
-                        System.out.println("Draw");
                     }
                 }else if(intX > 685 && intX < 785){
                     if(blnHostPlayerTurn==true){
@@ -279,12 +251,20 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                         theframe.pack();
                         theplay.repaint();
                     }
-                    if(blnWin == true){
-                        System.out.println("You win");
-                    }else if(intCounter == 42){
-                        System.out.println("Draw");
-                    }
+                }else{
+                    theframe.setContentPane(theplay);
+                    theframe.pack();
+                    theplay.repaint();
                 }
+            }
+            if(blnWin == true){ //win
+                theEnd.blnWin = true; 
+                theframe.setContentPane(theEnd);
+                theframe.pack();
+                theframe.repaint();
+
+            }else if(intCounter == 21){ //draw
+                System.out.println("Draw");
             }
         }else if(evt.getSource() == theTimer){
             theplay.intY++;
@@ -294,6 +274,8 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                 theplay.blnAnimDone = true;
                 theplay.intY=-30;
             }
+        }else if(evt.getSource() == quit){
+            System.exit(0);
         }else if(evt.getSource() == play){
             if(ipField.getText().equals("") && portField.getText().equals("")){
                 System.out.println("Enter a port number and/or IP Address\n");
@@ -476,7 +458,10 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
                 theplay.repaint();
                 moveLabel.setText("Your Move");
                 if(blnWin == true){
-                    System.out.println("You lost");
+                    theEnd.blnWin = false; 
+                    theframe.setContentPane(theEnd);
+                    theframe.pack();
+                    theEnd.repaint();
                 }
                 blnHostPlayerTurn=true;
             }else{
@@ -532,6 +517,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         thpanel.setLayout(null);
         hppanel.setLayout(null);
         theplay.setLayout(null);
+        theEnd.setLayout(null);
         
         drop.setSize(360,50);
         play.setSize(300, 90);
@@ -555,6 +541,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         six.setSize(200, 200);
         seven.setSize(200, 200);
         back.setSize(100, 40);
+        quit.setSize(300, 60);
 
         drop.setLocation(890,120);
         play.setLocation(360, 350);
@@ -578,6 +565,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         six.setLocation(650, 525);
         seven.setLocation(750, 525);
         back.setLocation(20, 0);
+        quit.setLocation(490, 500);
 
         drop.addActionListener(this);
         play.addActionListener(this);
@@ -588,6 +576,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         custom.addActionListener(this);
         theSend.addActionListener(this);
         back.addActionListener(this);
+        quit.addActionListener(this);
         theChat.setEnabled(false);
         theframe.addMouseMotionListener(this);
         theframe.addMouseListener(this);
@@ -610,6 +599,10 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
             moveLabel.setForeground(Color.WHITE);
             moveLabel.setFont(fntAerialLarge);
 
+            quit.setBackground(new Color(6,40,61));
+            quit.setForeground(Color.WHITE);
+            quit.setFont(fntAerialLarge);
+
         theplay.add(drop);
         theplay.add(theScroll);
         theplay.add(theSend);
@@ -630,6 +623,7 @@ public class mainGame implements ActionListener, ChangeListener, MouseMotionList
         theplay.add(six);
         theplay.add(seven);
         hppanel.add(back);
+        theEnd.add(quit);
         
 		play.setHorizontalAlignment(JButton.CENTER);
 		help.setHorizontalAlignment(JButton.CENTER);
